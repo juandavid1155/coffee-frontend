@@ -2,10 +2,11 @@ import { useState } from "react"
 import logo from "../assets/logo.png"
 import { Link } from "react-router-dom"
 import { products } from "../data/products"
+import { useCart } from "../context/CartContext"
 
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
-
+    const { cart } = useCart()
     return (
         <nav className="bg-black text-white border-b border-zinc-800 relative">
 
@@ -46,6 +47,22 @@ function Navbar() {
 
                     <li className="cursor-pointer hover:text-[#C8A46B] transition">
                         Contacto
+                    </li>
+
+                    <li className="relative cursor-pointer">
+
+                        <div className="flex items-center gap-2">
+
+                            <span className="text-xl">
+                                🛒
+                            </span>
+
+                            <span className="text-sm">
+                                {cart.length}
+                            </span>
+
+                        </div>
+
                     </li>
 
                 </ul>
