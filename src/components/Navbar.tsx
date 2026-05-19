@@ -1,5 +1,6 @@
 import { useState } from "react"
 import logo from "../assets/logo.png"
+import Arbol from "../assets/arbol.png"
 import { Link } from "react-router-dom"
 import { products } from "../data/products"
 import { useCart } from "../context/CartContext"
