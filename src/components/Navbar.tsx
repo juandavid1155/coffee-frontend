@@ -13,7 +13,7 @@ function Navbar() {
     return (
         <nav className="bg-black text-white border-b border-zinc-800 relative">
 
-            <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-8 py-5 grid grid-cols-3 items-center">
 
                 <Link to="/">
                     <img
@@ -23,7 +23,7 @@ function Navbar() {
                     />
                 </Link>
 
-                <ul className="flex gap-10 text-sm uppercase tracking-wider">
+               <ul className="flex justify-center gap-10 text-sm uppercase tracking-wider">
 
                     <li>
 
@@ -52,28 +52,38 @@ function Navbar() {
                         Contacto
                     </li>
 
-                    <li
-                        onClick={() => setIsCartOpen(true)}
-                        className="relative cursor-pointer"
-                    >
-
-                        <div className="flex items-center gap-2">
-
-                            <ShoppingBag
-                                size={20}
-                                className="text-zinc-200 hover:text-[#C8A46B] transition"
-                            />
-
-                            <span className="text-sm">
-                                {cart.length}
-                            </span>
-
-                        </div>
-
-                    </li>
+                    
 
                 </ul>
+
+                
+            <div className="flex items-center justify-end gap-8">
+
+    <button
+        onClick={() => setIsCartOpen(true)}
+        className="flex items-center gap-2 hover:text-[#C8A46B] transition"
+    >
+
+        <ShoppingBag
+            size={20}
+            className="text-zinc-200"
+        />
+
+        <span className="text-sm">
+            {cart.length}
+        </span>
+
+    </button>
+
+    <img 
+        src={logo}
+        alt="Árbol Logo"
+        className="h-10 object-contain"
+    />
+
+</div>
             </div>
+
 
             {showMenu && (
                 <div
