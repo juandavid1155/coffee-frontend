@@ -76,7 +76,7 @@ function Navbar() {
     </button>
 
     <img 
-        src={logo}
+        src={Arbol}
         alt="Árbol Logo"
         className="h-10 object-contain"
     />
