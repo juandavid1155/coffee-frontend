@@ -1,4 +1,5 @@
 type ButtonProps = {
+
     children: React.ReactNode
 
     onClick?: () => void
@@ -17,6 +18,7 @@ type ButtonProps = {
 }
 
 function Button({
+
     children,
     onClick,
 
@@ -27,26 +29,111 @@ function Button({
     shake = false,
 
     added = false,
+
 }: ButtonProps) {
 
-    const baseStyles =
-        "transition-all duration-300"
+    const baseStyles = `
+
+        flex items-center justify-center
+
+        rounded-xl
+
+        transition-all duration-300 ease-out
+
+        active:scale-[0.98]
+
+        whitespace-nowrap
+    `
 
     const variants = {
 
         primary:
-            "bg-[#C8A46B] text-black px-8 py-4 rounded-xl font-semibold text-lg hover:scale-105",
+            `
+            bg-gold text-black
+
+            px-[clamp(1.3rem,2vw,2rem)]
+            py-[clamp(0.8rem,1vw,1.1rem)]
+
+            text-[clamp(0.95rem,1vw,1.1rem)]
+
+            font-semibold
+
+            hover:scale-[1.03]
+            hover:brightness-105
+            `,
 
         outline: added
-            ? "bg-[#C8A46B] text-black scale-105 shadow-[0_0_30px_rgba(200,164,107,0.5)] border border-[#C8A46B] px-8 py-4 rounded-xl"
-            : "border border-[#C8A46B] text-[#C8A46B] hover:bg-[#C8A46B] hover:text-black px-8 py-4 rounded-xl",
+
+            ? `
+            bg-gold
+            text-black
+
+            border border-gold
+
+            shadow-gold
+
+            scale-[1.03]
+
+            px-[clamp(1.3rem,2vw,2rem)]
+            py-[clamp(0.8rem,1vw,1.1rem)]
+
+            text-[clamp(0.95rem,1vw,1.1rem)]
+            `
+
+            : `
+            border border-gold
+            text-gold
+
+            px-[clamp(1.3rem,2vw,2rem)]
+            py-[clamp(0.8rem,1vw,1.1rem)]
+
+            text-[clamp(0.95rem,1vw,1.1rem)]
+
+            hover:bg-gold
+            hover:text-black
+
+            hover:scale-[1.03]
+            `,
 
         selector: active
-            ? "bg-[#C8A46B] text-black border border-[#C8A46B] px-6 py-3 rounded-xl"
-            : "border border-zinc-700 hover:border-[#C8A46B] px-6 py-3 rounded-xl",
+
+            ? `
+            bg-gold
+            text-black
+
+            border border-gold
+
+            px-[clamp(1rem,1.4vw,1.4rem)]
+            py-[clamp(0.7rem,1vw,1rem)]
+
+            text-[clamp(0.85rem,1vw,1rem)]
+            `
+
+            : `
+            border border-zinc-700
+
+            hover:border-gold
+
+            px-[clamp(1rem,1.4vw,1.4rem)]
+            py-[clamp(0.7rem,1vw,1rem)]
+
+            text-[clamp(0.85rem,1vw,1rem)]
+            `,
 
         icon:
-            "w-12 h-12 border border-zinc-700 rounded-xl text-xl hover:border-[#C8A46B]",
+            `
+            w-[clamp(2.5rem,3vw,3rem)]
+            h-[clamp(2.5rem,3vw,3rem)]
+
+            border border-zinc-700
+
+            rounded-xl
+
+            text-[clamp(1rem,1.2vw,1.2rem)]
+
+            hover:border-gold
+            hover:scale-[1.03]
+            `,
     }
 
     return (
@@ -55,17 +142,22 @@ function Button({
             onClick={onClick}
             className={`
 
-        ${baseStyles}
+                ${baseStyles}
 
-        ${variants[variant]}
+                ${variants[variant]}
 
-        ${shake
-                    ? "animate-shake scale-105"
-                    : ""}
-      `}
+                ${shake
+                    ? "animate-shake scale-[1.03]"
+                    : ""
+                }
+
+            `}
         >
+
             {children}
+
         </button>
+
     )
 }
 

@@ -2,20 +2,26 @@ import {
     createContext,
     useContext,
     useState,
+    useMemo,
 } from "react"
 
-type CartItem = {
+export type CartItem = {
+
     slug: string
+
     name: string
+
     image: string
 
     size: string
+
     grind: string
 
     quantity: number
 }
 
 type CartContextType = {
+
     cart: CartItem[]
 
     addToCart: (item: CartItem) => void
@@ -27,7 +33,8 @@ type CartContextType = {
     >
 }
 
-const CartContext = createContext<CartContextType | null>(null)
+const CartContext =
+    createContext<CartContextType | null>(null)
 
 export function CartProvider({
     children,
@@ -41,51 +48,69 @@ export function CartProvider({
 
     function addToCart(item: CartItem) {
 
-  setCart((prev) => {
+        setCart((prev) => {
 
-    const existingItem = prev.find(
-      (cartItem) =>
-        cartItem.slug === item.slug &&
-        cartItem.size === item.size &&
-        cartItem.grind === item.grind
-    )
+            const existingItem = prev.find(
+                (cartItem) =>
 
-    if (existingItem) {
+                    cartItem.slug === item.slug &&
+                    cartItem.size === item.size &&
+                    cartItem.grind === item.grind
+            )
 
-      return prev.map((cartItem) => {
+            if (existingItem) {
 
-        if (
-          cartItem.slug === item.slug &&
-          cartItem.size === item.size &&
-          cartItem.grind === item.grind
-        ) {
+                return prev.map((cartItem) => {
 
-          return {
-            ...cartItem,
-            quantity:
-              cartItem.quantity + item.quantity,
-          }
-        }
+                    if (
 
-        return cartItem
-      })
+                        cartItem.slug === item.slug &&
+                        cartItem.size === item.size &&
+                        cartItem.grind === item.grind
+
+                    ) {
+
+                        return {
+
+                            ...cartItem,
+
+                            quantity:
+                                cartItem.quantity + item.quantity,
+                        }
+                    }
+
+                    return cartItem
+
+                })
+            }
+
+            return [...prev, item]
+
+        })
+
+    
     }
 
-    return [...prev, item]
-  })
-}
-    return (
-        <CartContext.Provider
-            value={{
-                cart,
-                addToCart,
+    const value = useMemo(() => ({
 
-                isCartOpen,
-                setIsCartOpen,
-            }}
-        >
+        cart,
+
+        addToCart,
+
+        isCartOpen,
+
+        setIsCartOpen,
+
+    }), [cart, isCartOpen])
+
+    return (
+
+        <CartContext.Provider value={value}>
+
             {children}
+
         </CartContext.Provider>
+
     )
 }
 
@@ -94,6 +119,7 @@ export function useCart() {
     const context = useContext(CartContext)
 
     if (!context) {
+
         throw new Error(
             "useCart must be used inside CartProvider"
         )

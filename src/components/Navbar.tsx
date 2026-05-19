@@ -1,148 +1,217 @@
 import { useState } from "react"
+
 import logo from "../assets/logo.png"
 import Arbol from "../assets/arbol.png"
+
 import { Link } from "react-router-dom"
+
 import { products } from "../data/products"
+
 import { useCart } from "../context/CartContext"
-import { ShoppingBag } from "lucide-react"
+
+import { ShoppingBag, Menu, X, ChevronDown } from "lucide-react"
+
+import Container from "./UI/Container"
+
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
-    const {
-        cart,
-        setIsCartOpen,
-    } = useCart()
+    const [mobileMenu, setMobileMenu] = useState(false)
+    const [mobileProducts, setMobileProducts] = useState(false)
+
+    const { cart, setIsCartOpen } = useCart()
+
     return (
-        <nav className="bg-black text-white border-b border-zinc-800 relative">
-
-            <div className="max-w-7xl mx-auto px-8 py-5 grid grid-cols-3 items-center">
-
-                <Link to="/">
-                    <img
-                        src={logo}
-                        alt="Elcira Logo"
-                        className="h-12 object-contain"
-                    />
-                </Link>
-
-               <ul className="flex justify-center gap-10 text-sm uppercase tracking-wider">
-
-                    <li>
-
-                        <Link
-                            to="/"
-                            onClick={() => setShowMenu(false)}
-                            className="hover:text-[#C8A46B] transition"
-                        >
-                            Inicio
-                        </Link>
-
-                    </li>
-
-                    <li
-                        className="cursor-pointer hover:text-[#C8A46B] transition"
-                        onMouseEnter={() => setShowMenu(true)}
+        <nav className="bg-black text-white border-b border-zinc-800 relative z-50">
+            {/* NAVBAR */}
+            <Container className="py-4 2xl:py-6">
+                <div className="flex items-center justify-between gap-4">
+                    {/* LOGO */}
+                    <Link
+                        to="/"
+                        className="flex items-center shrink-0"
+                        onClick={() => {
+                            setShowMenu(false)
+                            setMobileMenu(false)
+                        }}
                     >
-                        Productos
-                    </li>
+                        <img
+                            src={logo}
+                            alt="Elcira Logo"
+                            className="h-10 sm:h-11 lg:h-12 2xl:h-16 w-auto object-contain"
+                        />
+                    </Link>
 
-                    <li className="cursor-pointer hover:text-[#C8A46B] transition">
-                        Nosotros
-                    </li>
+                    {/* DESKTOP MENU */}
+                    <ul className="hidden lg:flex items-center gap-8 xl:gap-12 2xl:gap-16 text-sm 2xl:text-base uppercase tracking-[0.2em]">
+                        <li>
+                            <Link
+                                to="/"
+                                onClick={() => setShowMenu(false)}
+                                className="hover:text-[#C8A46B] transition-colors duration-300"
+                            >
+                                Inicio
+                            </Link>
+                        </li>
 
-                    <li className="cursor-pointer hover:text-[#C8A46B] transition">
-                        Contacto
-                    </li>
+                        <li
+                            className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300"
+                            onMouseEnter={() => setShowMenu(true)}
+                        >
+                            Productos
+                        </li>
 
-                    
+                        <li className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300">
+                            Nosotros
+                        </li>
 
-                </ul>
+                        <li className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300">
+                            Contacto
+                        </li>
+                    </ul>
 
-                
-            <div className="flex items-center justify-end gap-8">
+                    {/* ICONOS */}
+                    <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 shrink-0">
+                        <button
+                            onClick={() => setIsCartOpen(true)}
+                            className="flex items-center gap-2 hover:text-[#C8A46B] transition-colors duration-300"
+                        >
+                            <ShoppingBag size={18} className="text-zinc-200" />
+                            <span className="text-sm 2xl:text-base">{cart.length}</span>
+                        </button>
 
-    <button
-        onClick={() => setIsCartOpen(true)}
-        className="flex items-center gap-2 hover:text-[#C8A46B] transition"
-    >
+                        <img
+                            src={Arbol}
+                            alt="Árbol Logo"
+                            className="hidden sm:block h-9 lg:h-10 2xl:h-14 w-auto object-contain"
+                        />
 
-        <ShoppingBag
-            size={20}
-            className="text-zinc-200"
-        />
+                        {/* MOBILE BUTTON */}
+                        <button
+                            onClick={() => setMobileMenu((prev) => !prev)}
+                            className="lg:hidden text-white hover:text-[#C8A46B] transition-colors"
+                            aria-label="Abrir menú"
+                        >
+                            {mobileMenu ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
+                </div>
+            </Container>
 
-        <span className="text-sm">
-            {cart.length}
-        </span>
+            {/* MOBILE MENU */}
+            {mobileMenu && (
+                <div className="lg:hidden border-t border-zinc-800 bg-black/95 backdrop-blur-md">
+                    <ul className="flex flex-col px-5 sm:px-6 py-6 uppercase tracking-[0.18em] text-sm">
+                        <li className="py-4 border-b border-zinc-800">
+                            <Link
+                                to="/"
+                                onClick={() => setMobileMenu(false)}
+                                className="hover:text-gold transition-colors"
+                            >
+                                Inicio
+                            </Link>
+                        </li>
 
-    </button>
+                        {/* PRODUCTOS CON ACORDEÓN */}
+                        <li className="border-b border-zinc-800">
+                            <button
+                                onClick={() => setMobileProducts((prev) => !prev)}
+                                className="w-full flex items-center justify-between py-4 hover:text-gold transition-colors"
+                            >
+                                Productos
+                                <ChevronDown
+                                    size={16}
+                                    className={`transition-transform duration-300 ${mobileProducts ? "rotate-180" : ""}`}
+                                />
+                            </button>
 
-    <img 
-        src={Arbol}
-        alt="Árbol Logo"
-        className="h-10 object-contain"
-    />
+                            {mobileProducts && (
+                                <ul className="pb-4 pl-4 flex flex-col gap-3">
+                                    {products.map((product) => (
+                                        <li key={product.slug}>
+                                            <Link
+                                                to={`/products/${product.slug}`}
+                                                onClick={() => {
+                                                    setMobileMenu(false)
+                                                    setMobileProducts(false)
+                                                }}
+                                                className="text-zinc-400 hover:text-gold transition-colors normal-case tracking-normal text-base font-semibold"
+                                            >
+                                                {product.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
 
-</div>
-            </div>
+                        <li className="py-4 border-b border-zinc-800">
+                            <span className="cursor-pointer hover:text-gold transition-colors">
+                                Nosotros
+                            </span>
+                        </li>
 
+                        <li className="py-4">
+                            <span className="cursor-pointer hover:text-gold transition-colors">
+                                Contacto
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            )}
 
+            {/* MEGA MENU */}
             {showMenu && (
                 <div
-                    className="absolute left-0 top-full w-full bg-zinc-950 border-t border-zinc-800 py-14 z-50"
+                    className="absolute left-0 top-full w-full bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 z-50 hidden lg:block"
                     onMouseEnter={() => setShowMenu(true)}
                     onMouseLeave={() => setShowMenu(false)}
                 >
-                    <div className="max-w-7xl mx-auto px-8 grid grid-cols-3 gap-16">
+                    <Container className="py-12">
+                        <div className="grid grid-cols-3 gap-12 2xl:gap-16 items-start">
+                            {/* VARIEDADES */}
+                            <div>
+                                <h3 className="text-[#C8A46B] mb-6 uppercase text-sm 2xl:text-base tracking-[0.2em]">
+                                    Variedades
+                                </h3>
+                                <ul className="space-y-4">
+                                    {products.map((product) => (
+                                        <li key={product.slug}>
+                                            <Link
+                                                to={`/products/${product.slug}`}
+                                                className="block text-2xl xl:text-3xl 2xl:text-4xl font-bold leading-tight hover:text-[#C8A46B] transition-colors duration-300"
+                                                onClick={() => setShowMenu(false)}
+                                            >
+                                                {product.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
 
-                        <div>
-                            <h3 className="text-[#C8A46B] mb-6 uppercase text-sm tracking-[0.2em]">
-                                Variedades
-                            </h3>
+                            {/* PRESENTACIONES */}
+                            <div>
+                                <h3 className="text-[#C8A46B] mb-6 uppercase text-sm 2xl:text-base tracking-[0.2em]">
+                                    Presentaciones
+                                </h3>
+                                <ul className="space-y-4 text-zinc-300 text-lg 2xl:text-xl">
+                                    <li>Verde</li>
+                                    <li>Pergamino</li>
+                                    <li>Tostado</li>
+                                    <li>Molido</li>
+                                    <li>En grano</li>
+                                </ul>
+                            </div>
 
-                            <ul className="space-y-5 text-4xl font-bold">
-
-                                {products.map((product) => (
-
-                                    <li key={product.slug}>
-
-                                        <Link
-                                            to={`/products/${product.slug}`}
-                                            className="hover:text-[#C8A46B] transition"
-                                            onClick={() => setShowMenu(false)}
-                                        >
-                                            {product.name}
-                                        </Link>
-
-                                    </li>
-
-                                ))}
-
-                            </ul>
+                            {/* IMAGEN */}
+                            <div>
+                                <img
+                                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+                                    alt="Coffee"
+                                    className="rounded-3xl w-full h-[320px] xl:h-[380px] 2xl:h-[440px] object-cover"
+                                />
+                            </div>
                         </div>
-
-                        <div>
-                            <h3 className="text-[#C8A46B] mb-6 uppercase text-sm tracking-[0.2em]">
-                                Presentaciones
-                            </h3>
-
-                            <ul className="space-y-4 text-zinc-300 text-lg">
-                                <li>Verde</li>
-                                <li>Pergamino</li>
-                                <li>Tostado</li>
-                                <li>Molido</li>
-                                <li>En grano</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <img
-                                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-                                alt="Coffee"
-                                className="rounded-3xl h-80 w-full object-cover"
-                            />
-                        </div>
-
-                    </div>
+                    </Container>
                 </div>
             )}
         </nav>
