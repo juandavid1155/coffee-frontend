@@ -6,6 +6,8 @@ import { products } from "../data/products"
 
 
 import { useCart } from "../context/CartContext"
+
+import Button from "../components/UI/button"
 function ProductPage() {
 
     const { slug } = useParams()
@@ -14,7 +16,10 @@ function ProductPage() {
         (p) => p.slug === slug
     )
 
-    const { addToCart } = useCart()
+    const {
+        addToCart,
+        setIsCartOpen,
+    } = useCart()
 
     if (!product) {
         return (
@@ -34,7 +39,27 @@ function ProductPage() {
         product.grindOptions[0]
     )
 
+
+
     const [quantity, setQuantity] = useState(1)
+
+
+    const [addedToCart, setAddedToCart] = useState(false)
+
+    const [shakeButton, setShakeButton] = useState(false)
+
+    function handleBuyNow() {
+
+
+        setIsCartOpen(true)
+
+        setShakeButton(true)
+
+
+        setTimeout(() => {
+            setShakeButton(false)
+        }, 500)
+    }
 
     return (
         <section className="bg-black text-white min-h-screen py-32">
@@ -130,16 +155,14 @@ function ProductPage() {
 
                             {product.sizes.map((size) => (
 
-                                <button
+                                <Button
                                     key={size}
+                                    variant="selector"
+                                    active={selectedSize === size}
                                     onClick={() => setSelectedSize(size)}
-                                    className={`px-6 py-3 rounded-xl border transition ${selectedSize === size
-                                            ? "bg-[#C8A46B] text-black border-[#C8A46B]"
-                                            : "border-zinc-700 hover:border-[#C8A46B]"
-                                        }`}
                                 >
                                     {size}
-                                </button>
+                                </Button>
 
                             ))}
 
@@ -158,16 +181,14 @@ function ProductPage() {
 
                             {product.grindOptions.map((grind) => (
 
-                                <button
+                                <Button
                                     key={grind}
+                                    variant="selector"
+                                    active={selectedGrind === grind}
                                     onClick={() => setSelectedGrind(grind)}
-                                    className={`p-4 rounded-xl border text-left transition ${selectedGrind === grind
-                                            ? "bg-[#C8A46B] text-black border-[#C8A46B]"
-                                            : "border-zinc-700 hover:border-[#C8A46B]"
-                                        }`}
                                 >
                                     {grind}
-                                </button>
+                                </Button>
 
                             ))}
 
@@ -184,25 +205,25 @@ function ProductPage() {
 
                         <div className="flex items-center gap-4">
 
-                            <button
+                            <Button
+                                variant="icon"
                                 onClick={() =>
                                     setQuantity((prev) => Math.max(1, prev - 1))
                                 }
-                                className="w-12 h-12 border border-zinc-700 rounded-xl text-xl"
                             >
                                 -
-                            </button>
+                            </Button>
 
                             <span className="text-2xl font-semibold">
                                 {quantity}
                             </span>
 
-                            <button
+                            <Button
+                                variant="icon"
                                 onClick={() => setQuantity((prev) => prev + 1)}
-                                className="w-12 h-12 border border-zinc-700 rounded-xl text-xl"
                             >
                                 +
-                            </button>
+                            </Button>
 
                         </div>
                     </div>
@@ -211,12 +232,12 @@ function ProductPage() {
 
                     <div className="flex gap-4">
 
-                        <button className="bg-[#C8A46B] text-black px-8 py-4 rounded-xl font-semibold text-lg hover:scale-105 transition">
-                            Comprar ahora
-                        </button>
+                        <Button
+                            variant="outline"
+                            added={addedToCart}
+                            shake={addedToCart}
+                            onClick={() => {
 
-                        <button
-                            onClick={() =>
                                 addToCart({
                                     slug: product.slug,
                                     name: product.name,
@@ -227,11 +248,28 @@ function ProductPage() {
 
                                     quantity,
                                 })
-                            }
-                            className="border border-[#C8A46B] text-[#C8A46B] px-8 py-4 rounded-xl hover:bg-[#C8A46B] hover:text-black transition"
+
+                                setAddedToCart(true)
+
+                                setQuantity(1)
+
+                                setTimeout(() => {
+                                    setAddedToCart(false)
+                                }, 2000)
+                            }}
                         >
-                            Agregar al carrito
-                        </button>
+                            {addedToCart
+                                ? "Agregado ✓"
+                                : "Agregar al carrito"}
+                        </Button>
+
+                        <Button
+                            variant="primary"
+                            shake={shakeButton}
+                            onClick={handleBuyNow}
+                        >
+                            Comprar ahora
+                        </Button>
 
                     </div>
 

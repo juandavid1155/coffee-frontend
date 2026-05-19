@@ -6,6 +6,8 @@ import FeaturedProducts from "./components/FeaturedProducts"
 import SocialSidebar from "./components/SocialSidebar"
 
 import ProductPage from "./pages/ProductPage"
+import CartSidebar from "./components/CartSidebar"
+import ScrollToHash from "./components/ScrollToHash"
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
       <Navbar />
 
       <SocialSidebar />
-
+      <CartSidebar />
+      <ScrollToHash />
       <Routes>
 
         <Route

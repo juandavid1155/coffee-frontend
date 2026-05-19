@@ -3,7 +3,10 @@ import { Link } from "react-router-dom"
 
 function FeaturedProducts() {
     return (
-        <section className="bg-black text-white py-28">
+        <section
+            id="products"
+            className="bg-black text-white py-28"
+        >
             <div className="max-w-7xl mx-auto px-8">
 
                 <div className="mb-20 text-center">

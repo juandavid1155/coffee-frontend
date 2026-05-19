@@ -1,4 +1,21 @@
+const origin = "Huila, Colombia"
+
+const sizes = [
+  "250g",
+  "500g",
+  "1000g",
+]
+
+const grindOptions = [
+  "En grano",
+  "Molienda gruesa",
+  "Molienda media",
+  "Molienda media fina",
+  "Molienda fina",
+]
+
 export const products = [
+
   {
     slug: "geisha",
 
@@ -10,7 +27,7 @@ export const products = [
     image:
       "https://images.unsplash.com/photo-1511920170033-f8396924c348",
 
-    origin: "Huila, Colombia",
+    origin,
 
     process: "Lavado",
 
@@ -20,18 +37,9 @@ export const products = [
       "Cítrico",
     ],
 
-    sizes: [
-      "250g",
-      "500g",
-      "1000g",
-    ],
+    sizes,
 
-    grindOptions: [
-      "En grano",
-      "Molido espresso",
-      "Molido filtrado",
-      "Prensa francesa",
-    ],
+    grindOptions,
   },
 
   {
@@ -45,7 +53,7 @@ export const products = [
     image:
       "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
 
-    origin: "Antioquia, Colombia",
+    origin,
 
     process: "Natural",
 
@@ -55,18 +63,9 @@ export const products = [
       "Chocolate",
     ],
 
-    sizes: [
-      "250g",
-      "500g",
-      "1000g",
-    ],
+    sizes,
 
-    grindOptions: [
-      "En grano",
-      "Molido espresso",
-      "Molido filtrado",
-      "Prensa francesa",
-    ],
+    grindOptions,
   },
 
   {
@@ -80,7 +79,7 @@ export const products = [
     image:
       "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
 
-    origin: "Tolima, Colombia",
+    origin,
 
     process: "Honey",
 
@@ -90,18 +89,9 @@ export const products = [
       "Cacao",
     ],
 
-    sizes: [
-      "250g",
-      "500g",
-      "1000g",
-    ],
+    sizes,
 
-    grindOptions: [
-      "En grano",
-      "Molido espresso",
-      "Molido filtrado",
-      "Prensa francesa",
-    ],
+    grindOptions,
   },
 
   {
@@ -115,7 +105,7 @@ export const products = [
     image:
       "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
 
-    origin: "Caldas, Colombia",
+    origin,
 
     process: "Lavado",
 
@@ -125,17 +115,9 @@ export const products = [
       "Cítrico",
     ],
 
-    sizes: [
-      "250g",
-      "500g",
-      "1000g",
-    ],
+    sizes,
 
-    grindOptions: [
-      "En grano",
-      "Molido espresso",
-      "Molido filtrado",
-      "Prensa francesa",
-    ],
+    grindOptions,
   },
+
 ]

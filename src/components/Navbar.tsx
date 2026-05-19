@@ -3,10 +3,13 @@ import logo from "../assets/logo.png"
 import { Link } from "react-router-dom"
 import { products } from "../data/products"
 import { useCart } from "../context/CartContext"
-
+import { ShoppingBag } from "lucide-react"
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
-    const { cart } = useCart()
+    const {
+        cart,
+        setIsCartOpen,
+    } = useCart()
     return (
         <nav className="bg-black text-white border-b border-zinc-800 relative">
 
@@ -49,13 +52,17 @@ function Navbar() {
                         Contacto
                     </li>
 
-                    <li className="relative cursor-pointer">
+                    <li
+                        onClick={() => setIsCartOpen(true)}
+                        className="relative cursor-pointer"
+                    >
 
                         <div className="flex items-center gap-2">
 
-                            <span className="text-xl">
-                                🛒
-                            </span>
+                            <ShoppingBag
+                                size={20}
+                                className="text-zinc-200 hover:text-[#C8A46B] transition"
+                            />
 
                             <span className="text-sm">
                                 {cart.length}
