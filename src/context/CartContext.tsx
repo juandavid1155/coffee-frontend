@@ -18,6 +18,8 @@ export type CartItem = {
     grind: string
 
     quantity: number
+
+    price: number
 }
 
 type CartContextType = {
@@ -25,6 +27,24 @@ type CartContextType = {
     cart: CartItem[]
 
     addToCart: (item: CartItem) => void
+
+    removeFromCart: (
+        slug: string,
+        size: string,
+        grind: string
+    ) => void
+
+    increaseQuantity: (
+        slug: string,
+        size: string,
+        grind: string
+    ) => void
+
+    decreaseQuantity: (
+        slug: string,
+        size: string,
+        grind: string
+    ) => void
 
     isCartOpen: boolean
 
@@ -47,6 +67,8 @@ export function CartProvider({
     const [isCartOpen, setIsCartOpen] = useState(false)
 
     function addToCart(item: CartItem) {
+
+
 
         setCart((prev) => {
 
@@ -88,7 +110,81 @@ export function CartProvider({
 
         })
 
-    
+
+
+
+
+    }
+
+    function removeFromCart(
+        slug: string,
+        size: string,
+        grind: string
+    ) {
+
+        setCart((prev) =>
+
+            prev.filter((item) =>
+
+                !(
+
+                    item.slug === slug &&
+                    item.size === size &&
+                    item.grind === grind
+
+                )
+            )
+        )
+    }
+
+    function increaseQuantity(
+        slug: string,
+        size: string,
+        grind: string
+    ) {
+
+        setCart((prev) =>
+
+            prev.map((item) =>
+
+                item.slug === slug &&
+                    item.size === size &&
+                    item.grind === grind
+
+                    ? {
+                        ...item,
+                        quantity: item.quantity + 1,
+                    }
+
+                    : item
+            )
+        )
+    }
+
+    function decreaseQuantity(
+        slug: string,
+        size: string,
+        grind: string
+    ) {
+
+        setCart((prev) =>
+
+            prev
+                .map((item) =>
+
+                    item.slug === slug &&
+                        item.size === size &&
+                        item.grind === grind
+
+                        ? {
+                            ...item,
+                            quantity: item.quantity - 1,
+                        }
+
+                        : item
+                )
+                .filter((item) => item.quantity > 0)
+        )
     }
 
     const value = useMemo(() => ({
@@ -98,8 +194,14 @@ export function CartProvider({
         addToCart,
 
         isCartOpen,
+        removeFromCart,
 
+        increaseQuantity,
+
+        decreaseQuantity,
         setIsCartOpen,
+
+
 
     }), [cart, isCartOpen])
 

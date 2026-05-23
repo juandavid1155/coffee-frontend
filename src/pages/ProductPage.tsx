@@ -84,6 +84,7 @@ function ProductPage() {
                         {product.description}
                     </p>
 
+
                     {/* DETAILS */}
                     <div className="grid grid-cols-2 gap-6 mb-10">
                         <div>
@@ -93,6 +94,8 @@ function ProductPage() {
                             <p className="text-lg lg:text-xl 2xl:text-2xl">
                                 {product.origin}
                             </p>
+
+
                         </div>
 
                         <div>
@@ -140,6 +143,17 @@ function ProductPage() {
                             ))}
                         </div>
                     </div>
+
+                    <p className="text-zinc-500 mb-4 2xl:text-lg">
+                        Precio
+                    </p>
+
+                    <p className="text-3xl lg:text-4xl 2xl:text-5xl font-bold text-gold mb-10">
+
+                        ${product.price[selectedSize as keyof typeof product.price].toLocaleString("es-CO")} COP
+
+                    </p>
+
 
                     {/* GRIND */}
                     <div className="mb-10">
@@ -202,6 +216,7 @@ function ProductPage() {
                                     size: selectedSize,
                                     grind: selectedGrind,
                                     quantity,
+                                    price: product.price[selectedSize as keyof typeof product.price],
                                 })
                                 setAddedToCart(true)
                                 setQuantity(1)

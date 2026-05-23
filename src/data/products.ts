@@ -1,123 +1,154 @@
 const origin = "Huila, Colombia"
 
 const sizes = [
-  "250g",
-  "500g",
-  "1000g",
+    "250g",
+    "500g",
+    "1000g",
+    "2500g",
 ]
 
 const grindOptions = [
-  "En grano",
-  "Molienda gruesa",
-  "Molienda media",
-  "Molienda media fina",
-  "Molienda fina",
+    "En grano",
+    "Molienda gruesa",
+    "Molienda media",
+    "Molienda media fina",
+    "Molienda fina",
 ]
+
+
 
 export const products = [
 
-  {
-    slug: "geisha",
+    {
+        slug: "geisha",
 
-    name: "Geisha",
+        name: "Geisha",
 
-    description:
-      "Café de especialidad con notas florales, cítricas y una acidez elegante.",
+        description:
+            "Café de especialidad con notas florales, cítricas y una acidez elegante.",
 
-    image:
-      "https://images.unsplash.com/photo-1511920170033-f8396924c348",
+        image:
+            "https://images.unsplash.com/photo-1511920170033-f8396924c348",
 
-    origin,
+        origin,
 
-    process: "Lavado",
+        process: "Lavado",
 
-    notes: [
-      "Floral",
-      "Miel",
-      "Cítrico",
-    ],
+        notes: [
+            "Floral",
+            "Miel",
+            "Cítrico",
+        ],
 
-    sizes,
+        sizes,
 
-    grindOptions,
-  },
+        grindOptions,
 
-  {
-    slug: "borbon-rosado",
+        price: {
+            "250g": 28000,
+            "500g": 52000,
+            "1000g": 98000,
+            "2500g": 220000,
+        },
+    },
 
-    name: "Borbón Rosado",
+    {
+        slug: "borbon-rosado",
 
-    description:
-      "Dulzura compleja y acidez brillante.",
+        name: "Borbón Rosado",
 
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
+        description:
+            "Dulzura compleja y acidez brillante.",
 
-    origin,
+        image:
+            "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
 
-    process: "Natural",
+        origin,
 
-    notes: [
-      "Panela",
-      "Frutos rojos",
-      "Chocolate",
-    ],
+        process: "Natural",
 
-    sizes,
+        notes: [
+            "Panela",
+            "Frutos rojos",
+            "Chocolate",
+        ],
 
-    grindOptions,
-  },
+        sizes,
 
-  {
-    slug: "castillo",
+        grindOptions,
 
-    name: "Castillo",
+        price: {
+            "250g": 28000,
+            "500g": 52000,
+            "1000g": 98000,
+            "2500g": 220000,
+        },
+    },
 
-    description:
-      "Balance perfecto para el día a día.",
+    {
+        slug: "castillo",
 
-    image:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+        name: "Castillo",
 
-    origin,
+        description:
+            "Balance perfecto para el día a día.",
 
-    process: "Honey",
+        image:
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
 
-    notes: [
-      "Caramelo",
-      "Nuez",
-      "Cacao",
-    ],
+        origin,
 
-    sizes,
+        process: "Honey",
 
-    grindOptions,
-  },
+        notes: [
+            "Caramelo",
+            "Nuez",
+            "Cacao",
+        ],
 
-  {
-    slug: "caturro",
+        sizes,
 
-    name: "Caturro",
+        grindOptions,
 
-    description:
-      "Tradición colombiana en cada taza.",
+        price: {
+            "250g": 28000,
+            "500g": 52000,
+            "1000g": 98000,
+            "2500g": 220000,
+        },
+    },
 
-    image:
-      "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
+    {
+        slug: "caturro",
 
-    origin,
+        name: "Caturro",
 
-    process: "Lavado",
+        description:
+            "Tradición colombiana en cada taza.",
 
-    notes: [
-      "Chocolate",
-      "Panela",
-      "Cítrico",
-    ],
+        image:
+            "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
 
-    sizes,
+        origin,
 
-    grindOptions,
-  },
+        process: "Lavado",
+
+        notes: [
+            "Chocolate",
+            "Panela",
+            "Cítrico",
+        ],
+
+        sizes,
+
+        grindOptions,
+
+        price: {
+            "250g": 28000,
+            "500g": 52000,
+            "1000g": 98000,
+            "2500g": 220000,
+        },
+    },
 
 ]
