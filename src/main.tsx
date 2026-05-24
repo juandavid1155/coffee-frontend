@@ -10,6 +10,7 @@ import { FavoritesProvider } from "./context/FavoritesContext"
 import App from './App.tsx'
 import './index.css'
 import { CartProvider } from "./context/CartContext"
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>

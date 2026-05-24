@@ -78,7 +78,7 @@ export function AuthProvider({
 
     function login(
         email: string,
-        password: string
+        _password: string
     ) {
 
         const fakeUser = {

@@ -9,7 +9,7 @@ import { products } from "../data/products"
 
 import { useCart } from "../context/CartContext"
 
-import { ShoppingBag, Menu, X, ChevronDown, User, LogOut } from "lucide-react"
+import { ShoppingBag, Menu, X, ChevronDown, User, } from "lucide-react"
 
 import ConfirmModal from "./UI/ConfirmModal"
 

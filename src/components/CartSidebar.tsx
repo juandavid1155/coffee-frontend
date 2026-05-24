@@ -1,7 +1,6 @@
 import { useCart } from "../context/CartContext"
 
 import {
-    Link,
     useNavigate,
 } from "react-router-dom"
 
