@@ -1,7 +1,6 @@
 import { X } from "lucide-react"
 
-import { useAuth }
-from "../../context/AuthContext"
+import { useAuth } from "../../context/AuthContext"
 
 type AuthModalProps = {
 
@@ -52,8 +51,11 @@ function AuthModal({
 
                 </button>
 
-                {children}
+                <div className="auth-modal-content cart-scroll">
 
+                    {children}
+
+                </div>
             </div>
 
         </div>

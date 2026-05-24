@@ -1,0 +1,338 @@
+/* NAVBAR */
+
+.navbar-container {
+
+    @apply
+    flex
+    items-center
+    justify-between
+
+    gap-4;
+}
+
+.navbar-actions {
+
+    @apply
+    flex
+    items-center
+
+    gap-2
+    sm:gap-4
+    lg:gap-6
+
+    min-w-0;
+}
+
+.navbar-logo {
+
+    @apply
+    flex
+    items-center
+
+    shrink-0;
+}
+
+.navbar-tree {
+
+    @apply
+    hidden
+    md:block
+
+    h-9
+    lg:h-10
+    2xl:h-14
+
+    w-auto
+
+    object-contain;
+}
+
+.navbar-desktop-menu {
+
+    @apply
+    hidden
+    lg:flex
+
+    items-center
+
+    gap-8
+    xl:gap-12
+    2xl:gap-16
+
+    text-sm
+    2xl:text-base
+
+    uppercase
+
+    tracking-[0.2em];
+}
+
+/* NAVBAR LOGO IMAGE */
+
+.navbar-logo-image {
+
+    @apply
+    h-10
+    sm:h-11
+    lg:h-12
+    2xl:h-16
+
+    w-auto
+
+    object-contain;
+    display: block;
+    width: auto;
+    object-fit: contain;
+    height: clamp(1.6rem, 7vw, 4rem);
+}
+
+@media (max-width: 375px) {
+    .navbar-logo-image {
+        height: 1.45rem;
+    }
+}
+
+/* NAVBAR LINK */
+
+.navbar-link {
+
+    @apply
+    hover:text-[#C8A46B]
+
+    transition-colors
+    duration-300;
+}
+
+/* NAVBAR ICON GROUP */
+
+.navbar-cart-icon {
+
+    @apply
+    flex
+    items-center
+
+    gap-2;
+}
+
+.navbar-cart-count {
+
+    @apply
+    text-sm
+    2xl:text-base;
+}
+
+/* MOBILE MENU BUTTON */
+
+.navbar-mobile-button {
+
+    @apply
+    lg:hidden
+
+    text-white
+
+    hover:text-[#C8A46B]
+
+    transition-colors;
+}
+
+/* MOBILE MENU */
+
+.navbar-mobile-menu {
+
+    @apply
+    lg:hidden
+
+    border-t
+    border-zinc-800
+
+    bg-black/95
+
+    backdrop-blur-md;
+}
+
+.navbar-mobile-menu-list {
+
+    @apply
+    flex
+    flex-col
+
+    px-5
+    sm:px-6
+
+    py-6
+
+    uppercase
+
+    tracking-[0.18em]
+
+    text-sm;
+}
+
+.navbar-mobile-item {
+
+    @apply
+    py-4
+
+    border-b
+    border-zinc-800;
+}
+
+.navbar-mobile-link {
+
+    @apply
+    hover:text-gold
+
+    transition-colors;
+}
+
+/* MOBILE PRODUCTS BUTTON */
+
+.navbar-mobile-products-button {
+
+    @apply
+    w-full
+
+    flex
+    items-center
+    justify-between
+
+    py-4
+
+    hover:text-gold
+
+    transition-colors;
+}
+
+/* MOBILE PRODUCTS LIST */
+
+.navbar-mobile-products-list {
+
+    @apply
+    pb-4
+    pl-4
+
+    flex
+    flex-col
+
+    gap-3;
+}
+
+.navbar-mobile-product-link {
+
+    @apply
+    text-zinc-400
+
+    hover:text-gold
+
+    transition-colors
+
+    normal-case
+
+    tracking-normal
+
+    text-base
+
+    font-semibold;
+}
+
+/* MEGA MENU */
+
+.navbar-mega-menu {
+
+    @apply
+    absolute
+
+    left-0
+    top-full
+
+    w-full
+
+    bg-zinc-950/95
+
+    backdrop-blur-md
+
+    border-t
+    border-zinc-800
+
+    z-50
+
+    hidden
+    lg:block;
+}
+
+.navbar-mega-grid {
+
+    @apply
+    grid
+    grid-cols-3
+
+    gap-12
+    2xl:gap-16
+
+    items-start;
+}
+
+.navbar-mega-title {
+
+    @apply
+    text-[#C8A46B]
+
+    mb-6
+
+    uppercase
+
+    text-sm
+    2xl:text-base
+
+    tracking-[0.2em];
+}
+
+.navbar-mega-products {
+
+    @apply
+    space-y-4;
+}
+
+.navbar-mega-product-link {
+
+    @apply
+    block
+
+    text-2xl
+    xl:text-3xl
+    2xl:text-4xl
+
+    font-bold
+
+    leading-tight
+
+    hover:text-[#C8A46B]
+
+    transition-colors
+    duration-300;
+}
+
+.navbar-mega-presentation-list {
+
+    @apply
+    space-y-4
+
+    text-zinc-300
+
+    text-lg
+    2xl:text-xl;
+}
+
+.navbar-mega-image {
+
+    @apply
+    rounded-3xl
+
+    w-full
+
+    h-[320px]
+    xl:h-[380px]
+    2xl:h-[440px]
+
+    object-cover;
+}

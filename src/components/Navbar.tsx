@@ -59,11 +59,11 @@ function Navbar() {
         <nav className="bg-black text-white border-b border-zinc-800 relative z-50">
             {/* NAVBAR */}
             <Container className="py-4 2xl:py-6">
-                <div className="flex items-center justify-between gap-4">
+                <div className="navbar-container">
                     {/* LOGO */}
                     <Link
                         to="/"
-                        className="flex items-center shrink-0"
+                        className="navbar-logo"
                         onClick={() => {
                             setShowMenu(false)
                             setMobileMenu(false)
@@ -72,41 +72,41 @@ function Navbar() {
                         <img
                             src={logo}
                             alt="Elcira Logo"
-                            className="h-10 sm:h-11 lg:h-12 2xl:h-16 w-auto object-contain"
+                            className="navbar-logo-image"
                         />
                     </Link>
 
                     {/* DESKTOP MENU */}
-                    <ul className="hidden lg:flex items-center gap-8 xl:gap-12 2xl:gap-16 text-sm 2xl:text-base uppercase tracking-[0.2em]">
+                    <ul className="navbar-desktop-menu">
                         <li>
                             <Link
                                 to="/"
                                 onClick={() => setShowMenu(false)}
-                                className="hover:text-[#C8A46B] transition-colors duration-300"
+                                className="navbar-link"
                             >
                                 Inicio
                             </Link>
                         </li>
 
                         <li
-                            className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300"
+                            className="navbar-link"
                             onMouseEnter={() => setShowMenu(true)}
                         >
                             Productos
                         </li>
 
-                        <li className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300">
+                        <li className="navbar-link">
                             Nosotros
                         </li>
 
-                        <li className="cursor-pointer hover:text-[#C8A46B] transition-colors duration-300">
+                        <li className="navbar-link">
                             Contacto
                         </li>
                     </ul>
 
                     {/* ICONOS */}
 
-                    <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 shrink-0">
+                    <div className="navbar-actions">
 
                         <IconButton
 
@@ -131,18 +131,26 @@ function Navbar() {
 
                             label="Favoritos"
 
-                            onClick={() =>
+                            onClick={() => {
+
+                                if (!user) {
+
+                                    setIsAuthOpen(true)
+
+                                    return
+                                }
+
                                 setIsFavoritesOpen(true)
-                            }
+                            }}
                         />
                         <IconButton
 
                             icon={
-                                <div className="flex items-center gap-2">
+                                <div className="navbar-cart-icon">
 
                                     <ShoppingBag size={18} />
 
-                                    <span className="text-sm 2xl:text-base">
+                                    <span className="navbar-cart-count">
 
                                         {cart.length}
 
@@ -234,13 +242,13 @@ function Navbar() {
                         <img
                             src={Arbol}
                             alt="Árbol Logo"
-                            className="hidden sm:block h-9 lg:h-10 2xl:h-14 w-auto object-contain"
+                            className="navbar-tree"
                         />
 
                         {/* MOBILE BUTTON */}
                         <button
                             onClick={() => setMobileMenu((prev) => !prev)}
-                            className="lg:hidden text-white hover:text-[#C8A46B] transition-colors"
+                            className="navbar-mobile-button"
                             aria-label="Abrir menú"
                         >
                             {mobileMenu ? <X size={24} /> : <Menu size={24} />}

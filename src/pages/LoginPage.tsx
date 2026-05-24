@@ -36,15 +36,15 @@ function LoginPage() {
 
         <div className="text-white flex items-center justify-center px-6">
 
-            <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-3xl p-8">
+            <div className="auth-form-card">
 
-                <h1 className="text-4xl font-bold mb-3">
+                <h1 className="auth-form-title">
 
                     Bienvenido
 
                 </h1>
 
-                <p className="text-zinc-400 mb-10">
+                <p className="auth-form-description">
 
                     Ingresa para continuar tu experiencia cafetera.
 
@@ -57,7 +57,7 @@ function LoginPage() {
 
                     <div>
 
-                        <label className="block text-sm text-zinc-400 mb-2">
+                        <label className="auth-form-label">
 
                             Correo electrónico
 
@@ -70,14 +70,14 @@ function LoginPage() {
                                 setEmail(e.target.value)
                             }
                             required
-                            className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-4 outline-none focus:border-[#C8A46B] transition"
+                            className="auth-form-input"
                         />
 
                     </div>
 
                     <div>
 
-                        <label className="block text-sm text-zinc-400 mb-2">
+                        <label className="auth-form-label">
 
                             Contraseña
 
@@ -90,7 +90,7 @@ function LoginPage() {
                                 setPassword(e.target.value)
                             }
                             required
-                            className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-4 outline-none focus:border-[#C8A46B] transition"
+                            className="auth-form-input"
                         />
 
                     </div>
@@ -100,7 +100,7 @@ function LoginPage() {
                         type="submit"
                         className="w-full"
                     >
-
+                        
                         Ingresar
 
                     </Button>

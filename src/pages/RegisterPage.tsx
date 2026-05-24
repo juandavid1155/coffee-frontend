@@ -44,13 +44,13 @@ function RegisterPage() {
 
             <div className="w-full">
 
-                <h1 className="text-4xl font-bold mb-3">
+                <h1 className="auth-form-label">
 
                     Crear cuenta
 
                 </h1>
 
-                <p className="text-zinc-400 mb-10">
+                <p className="auth-form-description">
 
                     Crea tu cuenta y guarda
                     tus cafés favoritos.
@@ -64,7 +64,7 @@ function RegisterPage() {
 
                     <div>
 
-                        <label className="block text-sm text-zinc-400 mb-2">
+                        <label className="auth-form-label">
 
                             Nombre
 
@@ -84,7 +84,7 @@ function RegisterPage() {
 
                     <div>
 
-                        <label className="block text-sm text-zinc-400 mb-2">
+                        <label className="auth-form-label">
 
                             Correo electrónico
 
@@ -104,7 +104,7 @@ function RegisterPage() {
 
                     <div>
 
-                        <label className="block text-sm text-zinc-400 mb-2">
+                        <label className="auth-form-label">
 
                             Contraseña
 

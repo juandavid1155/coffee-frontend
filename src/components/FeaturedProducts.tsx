@@ -80,9 +80,6 @@ function FeaturedProducts() {
 
                                             slug: product.slug,
 
-                                            size: product.sizes[1],
-
-                                            grind: product.grindOptions[0],
                                         })
                                     }
                                     className="product-favorite-button"
@@ -94,10 +91,6 @@ function FeaturedProducts() {
                                             isFavorite({
 
                                                 slug: product.slug,
-
-                                                size: product.sizes[1],
-
-                                                grind: product.grindOptions[0],
                                             })
 
                                                 ? "product-favorite-active"

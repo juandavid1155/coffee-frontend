@@ -146,3 +146,106 @@
 
     text-center;
 }
+
+/* FAVORITES */
+
+.favorite-card {
+
+    @apply
+    relative
+
+    flex
+
+    gap-4
+
+    p-4
+
+    rounded-2xl
+
+    border
+    border-zinc-800
+
+    bg-black/40
+
+    mb-4;
+}
+
+.favorite-image {
+
+    @apply
+    w-24
+    h-24
+
+    rounded-xl
+
+    object-cover
+
+    shrink-0;
+}
+
+.favorite-content {
+
+    @apply
+    flex-1
+
+    flex
+    flex-col;
+}
+
+.favorite-name {
+
+    @apply
+    text-white
+
+    font-semibold
+
+    text-lg
+
+    mb-2;
+}
+
+.favorite-meta {
+
+    @apply
+    text-sm
+
+    text-zinc-400
+
+    mb-1;
+}
+
+.favorite-link {
+
+    @apply
+    mt-auto
+
+    text-sm
+
+    uppercase
+
+    tracking-[0.15em]
+
+    text-gold
+
+    transition
+    duration-300
+
+    hover:opacity-80;
+}
+
+.favorite-remove {
+
+    @apply
+    absolute
+
+    top-3
+    right-3
+
+    text-zinc-500
+
+    transition
+    duration-300
+
+    hover:text-red-400;
+}
+

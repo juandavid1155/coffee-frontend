@@ -2,6 +2,7 @@ import {
     createContext,
     useContext,
     useState,
+    useEffect,
 } from "react"
 
 import { useAuth } from "./AuthContext"
@@ -10,14 +11,16 @@ type FavoriteItem = {
 
     slug: string
 
-    size: string
+    size?: string
 
-    grind: string
+    grind?: string
 }
 
 type FavoritesContextType = {
 
     favorites: FavoriteItem[]
+
+
 
     toggleFavorite: (
         item: FavoriteItem
@@ -35,6 +38,8 @@ type FavoritesContextType = {
     >
 }
 
+
+
 const FavoritesContext =
     createContext<FavoritesContextType | null>(null)
 
@@ -46,8 +51,11 @@ export function FavoritesProvider({
     children: React.ReactNode
 }) {
 
+
+
     const [favorites, setFavorites] =
         useState<FavoriteItem[]>([])
+
 
     const [
         isFavoritesOpen,
@@ -62,7 +70,41 @@ export function FavoritesProvider({
 
     } = useAuth()
 
-    
+
+    const favoritesKey = user
+
+        ? `favorites-${user.email}`
+
+        : "favorites-guest"
+
+    useEffect(() => {
+
+        const storedFavorites =
+            localStorage.getItem(
+                favoritesKey
+            )
+
+        setFavorites(
+
+            storedFavorites
+
+                ? JSON.parse(storedFavorites)
+
+                : []
+        )
+
+    }, [favoritesKey])
+
+    useEffect(() => {
+
+        localStorage.setItem(
+            favoritesKey,
+            JSON.stringify(favorites)
+        )
+
+    }, [favorites, favoritesKey])
+
+
     function toggleFavorite(
         item: FavoriteItem
     ) {

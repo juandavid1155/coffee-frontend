@@ -101,6 +101,7 @@ export function AuthProvider({
         setUser(null)
 
         localStorage.removeItem("user")
+
     }
 
     const value = useMemo(() => ({
