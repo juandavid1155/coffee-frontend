@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import { products } from "../data/products"
 
-import { useCart } from "../context/CartContext"
-
-import Button from "../components/UI/button"
 import Container from "../components/UI/Container"
+
+import AddToCartActions from "../components/UI/AddToCartActions"
 
 function ProductPage() {
 
@@ -15,23 +14,6 @@ function ProductPage() {
     const product = products.find(
         (p) => p.slug === slug
     )
-
-    const {
-        addToCart,
-        setIsCartOpen,
-    } = useCart()
-
-    const [selectedSize, setSelectedSize] = useState(
-        product?.sizes[1] ?? ""
-    )
-
-    const [selectedGrind, setSelectedGrind] = useState(
-        product?.grindOptions[0] ?? ""
-    )
-
-    const [quantity, setQuantity] = useState(1)
-    const [addedToCart, setAddedToCart] = useState(false)
-    const [shakeButton, setShakeButton] = useState(false)
 
     // TODOS LOS HOOKS ANTES DEL RETURN CONDICIONAL
     useEffect(() => {
@@ -46,14 +28,6 @@ function ProductPage() {
                 </h1>
             </div>
         )
-    }
-
-    function handleBuyNow() {
-        setIsCartOpen(true)
-        setShakeButton(true)
-        setTimeout(() => {
-            setShakeButton(false)
-        }, 500)
     }
 
     return (
@@ -125,117 +99,10 @@ function ProductPage() {
                         </div>
                     </div>
 
-                    {/* SIZE */}
-                    <div className="mb-10">
-                        <p className="text-zinc-500 mb-4 2xl:text-lg">
-                            Presentación
-                        </p>
-                        <div className="flex gap-4 flex-wrap">
-                            {product.sizes.map((size) => (
-                                <Button
-                                    key={size}
-                                    variant="selector"
-                                    active={selectedSize === size}
-                                    onClick={() => setSelectedSize(size)}
-                                >
-                                    {size}
-                                </Button>
-                            ))}
-                        </div>
-                    </div>
+                    <AddToCartActions
+                        product={product}
+                    />
 
-                    <p className="text-zinc-500 mb-4 2xl:text-lg">
-                        Precio
-                    </p>
-
-                    <p className="text-3xl lg:text-4xl 2xl:text-5xl font-bold text-gold mb-10">
-
-                        ${product.price[selectedSize as keyof typeof product.price].toLocaleString("es-CO")} COP
-
-                    </p>
-
-
-                    {/* GRIND */}
-                    <div className="mb-10">
-                        <p className="text-zinc-500 mb-4 2xl:text-lg">
-                            Tipo de molienda
-                        </p>
-                        <div className="grid sm:grid-cols-2 gap-4">
-                            {product.grindOptions.map((grind) => (
-                                <Button
-                                    key={grind}
-                                    variant="selector"
-                                    active={selectedGrind === grind}
-                                    onClick={() => setSelectedGrind(grind)}
-                                >
-                                    {grind}
-                                </Button>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* QUANTITY */}
-                    <div className="mb-10">
-                        <p className="text-zinc-500 mb-4 2xl:text-lg">
-                            Cantidad
-                        </p>
-                        <div className="flex items-center gap-4">
-                            <Button
-                                variant="icon"
-                                onClick={() =>
-                                    setQuantity((prev) => Math.max(1, prev - 1))
-                                }
-                            >
-                                -
-                            </Button>
-
-                            <span className="text-xl lg:text-2xl 2xl:text-3xl font-semibold">
-                                {quantity}
-                            </span>
-
-                            <Button
-                                variant="icon"
-                                onClick={() => setQuantity((prev) => prev + 1)}
-                            >
-                                +
-                            </Button>
-                        </div>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="flex flex-wrap gap-4">
-                        <Button
-                            variant="outline"
-                            added={addedToCart}
-                            shake={addedToCart}
-                            onClick={() => {
-                                addToCart({
-                                    slug: product.slug,
-                                    name: product.name,
-                                    image: product.image,
-                                    size: selectedSize,
-                                    grind: selectedGrind,
-                                    quantity,
-                                    price: product.price[selectedSize as keyof typeof product.price],
-                                })
-                                setAddedToCart(true)
-                                setQuantity(1)
-                                setTimeout(() => {
-                                    setAddedToCart(false)
-                                }, 2000)
-                            }}
-                        >
-                            {addedToCart ? "Agregado ✓" : "Agregar al carrito"}
-                        </Button>
-
-                        <Button
-                            variant="primary"
-                            shake={shakeButton}
-                            onClick={handleBuyNow}
-                        >
-                            Comprar ahora
-                        </Button>
-                    </div>
                 </div>
 
             </Container>

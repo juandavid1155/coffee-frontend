@@ -1,13 +1,20 @@
 import { useCart } from "../context/CartContext"
 
-import { Link } from "react-router-dom"
+import {
+    Link,
+    useNavigate,
+} from "react-router-dom"
 
 import Button from "./UI/button"
 
-import ConfirmModal from "./UI/confirmmodal"
+import ConfirmModal from "./UI/ConfirmModal"
 import { useState, useEffect } from "react"
 
 function CartSidebar() {
+
+
+    const navigate = useNavigate()
+
 
     const {
         cart,
@@ -70,7 +77,7 @@ function CartSidebar() {
             {/* SIDEBAR */}
 
             <aside
-                overflow-y-auto
+
                 className={`
 
                     fixed top-0 right-0
@@ -140,32 +147,39 @@ function CartSidebar() {
 
                             </p>
 
-                            <Link
-                                to="/#products"
-                                onClick={() => setIsCartOpen(false)}
+                            <Button
+                                variant="primary"
+
+                                onClick={() => {
+
+                                    const isHomePage =
+                                        window.location.pathname === "/"
+
+                                    setIsCartOpen(false)
+
+                                    if (isHomePage) {
+
+                                        setTimeout(() => {
+
+                                            const section =
+                                                document.getElementById("products")
+
+                                            section?.scrollIntoView({
+                                                behavior: "smooth",
+                                            })
+
+                                        }, 300)
+
+                                    } else {
+
+                                        navigate("/#products")
+                                    }
+                                }}
                             >
 
-                                <Button
-                                    variant="primary"
-                                    onClick={() => {
+                                Explorar cafés
 
-                                        setIsCartOpen(false)
-
-                                        const section =
-                                            document.getElementById("products")
-
-                                        section?.scrollIntoView({
-                                            behavior: "smooth",
-                                        })
-
-                                    }}
-                                >
-
-                                    Explorar cafés
-
-                                </Button>
-
-                            </Link>
+                            </Button>
 
                         </div>
 
@@ -296,33 +310,41 @@ function CartSidebar() {
 
                 </div>
 
-                {/* FOOTER */}
+                {cart.length > 0 && (
 
-                <div className="flex items-center justify-between gap-6 mb-5 px-2">
+                    <>
 
-                    <span className="text-zinc-400 text-xl">
+                        {/* FOOTER */}
 
-                        Subtotal
+                        <div className="flex items-center justify-between gap-6 mb-5 px-2">
 
-                    </span>
+                            <span className="text-zinc-400 text-xl">
 
-                    <span className="text-2xl font-bold text-gold">
+                                Subtotal
 
-                        ${subtotal.toLocaleString("es-CO")} COP
+                            </span>
 
-                    </span>
+                            <span className="text-2xl font-bold text-gold">
 
-                </div>
+                                ${subtotal.toLocaleString("es-CO")} COP
 
-                <div className="p-6 border-t border-zinc-800 bg-zinc-950 shrink-0">
+                            </span>
 
-                    <button className="w-full bg-gold text-black py-4 rounded-xl font-semibold hover:scale-[1.02] transition">
+                        </div>
 
-                        Finalizar compra
+                        <div className="p-6 border-t border-zinc-800 bg-zinc-950 shrink-0">
 
-                    </button>
+                            <button className="w-full bg-gold text-black py-4 rounded-xl font-semibold hover:scale-[1.02] transition">
 
-                </div>
+                                Finalizar compra
+
+                            </button>
+
+                        </div>
+
+                    </>
+
+                )}
 
             </aside>
 
@@ -335,6 +357,8 @@ function CartSidebar() {
                 description="¿Seguro que deseas eliminar este café del carrito?"
 
                 onCancel={() => setItemToRemove(null)}
+
+                confirmText="Eliminar"
 
                 onConfirm={() => {
 

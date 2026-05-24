@@ -4,51 +4,71 @@ import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import FeaturedProducts from "./components/FeaturedProducts"
 import SocialSidebar from "./components/SocialSidebar"
+import LoginPage from "./pages/LoginPage"
 
 import ProductPage from "./pages/ProductPage"
 
 import CartSidebar from "./components/CartSidebar"
 import ScrollToHash from "./components/ScrollToHash"
 
+import AuthModal from "./components/UI/AuthModal"
+
+import RegisterPage from "./pages/RegisterPage"
+
+import { useAuth } from "./context/AuthContext"
+
+
 function App() {
 
-    return (
+  const { authMode } = useAuth()
 
-        <div className="min-h-screen bg-black text-white overflow-x-hidden">
+  return (
 
-            <Navbar />
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
 
-            <SocialSidebar />
+      <Navbar />
 
-            <CartSidebar />
+      <SocialSidebar />
 
-            <ScrollToHash />
+      <CartSidebar />
 
-            <main className="overflow-x-hidden">
+      <ScrollToHash />
 
-                <Routes>
+      <main className="overflow-x-hidden">
 
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                <Hero />
-                                <FeaturedProducts />
-                            </>
-                        }
-                    />
+        <Routes>
 
-                    <Route
-                        path="/products/:slug"
-                        element={<ProductPage />}
-                    />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <FeaturedProducts />
+              </>
+            }
+          />
 
-                </Routes>
+          <Route
+            path="/products/:slug"
+            element={<ProductPage />}
+          />
+        </Routes>
 
-            </main>
+      </main>
 
-        </div>
-    )
+      <AuthModal>
+
+        {authMode === "login"
+
+          ? <LoginPage />
+
+          : <RegisterPage />
+        }
+
+      </AuthModal>
+
+    </div>
+  )
 }
 
 export default App

@@ -1,8 +1,22 @@
 import { products } from "../data/products"
 import { Link } from "react-router-dom"
 import Container from "./UI/Container"
+import { Plus } from "lucide-react"
+import { useState } from "react"
+import QuickViewModal from "./UI/QuickViewModal"
+import { Heart } from "lucide-react"
+import { useFavorites } from "../context/FavoritesContext"
 
 function FeaturedProducts() {
+
+    const [selectedProduct, setSelectedProduct] =
+        useState<(typeof products)[0] | null>(null)
+
+    const {
+        toggleFavorite,
+        isFavorite,
+    } = useFavorites()
+
     return (
         <section
             id="products"
@@ -36,7 +50,7 @@ function FeaturedProducts() {
                             "
                         >
                             {/* IMAGE */}
-                            <div className="overflow-hidden">
+                            <div className="overflow-hidden relative">
                                 <img
                                     src={product.image}
                                     alt={product.name}
@@ -44,10 +58,61 @@ function FeaturedProducts() {
                                     w-full
                                     h-[clamp(260px,34vw,520px)]
                                     object-cover
-                                    group-hover:scale-105
+                                    group-hover:scale-95
                                     transition-transform duration-700
                                     "
                                 />
+                                <button className="product-hover-button"
+                                    onClick={() => setSelectedProduct(product)}>
+
+
+                                    <span className="product-hover-icon">
+
+                                        <Plus size={28} strokeWidth={1.8} />
+
+                                    </span>
+
+                                </button>
+                                <button
+                                    onClick={() =>
+
+                                        toggleFavorite({
+
+                                            slug: product.slug,
+
+                                            size: product.sizes[1],
+
+                                            grind: product.grindOptions[0],
+                                        })
+                                    }
+                                    className="product-favorite-button"
+                                >
+
+                                    <Heart
+                                        size={22}
+                                        className={
+                                            isFavorite({
+
+                                                slug: product.slug,
+
+                                                size: product.sizes[1],
+
+                                                grind: product.grindOptions[0],
+                                            })
+
+                                                ? "product-favorite-active"
+
+                                                : ""
+                                        }
+                                    />
+
+                                    <span className="product-favorite-label">
+
+                                        Favorito
+
+                                    </span>
+
+                                </button>
                             </div>
 
                             {/* CONTENT */}
@@ -71,6 +136,18 @@ function FeaturedProducts() {
                     ))}
                 </div>
             </Container>
+
+            <QuickViewModal
+
+                isOpen={!!selectedProduct}
+
+                product={selectedProduct}
+
+                onClose={() =>
+                    setSelectedProduct(null)
+                }
+            />
+
         </section>
     )
 }

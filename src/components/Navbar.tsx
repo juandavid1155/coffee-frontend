@@ -9,16 +9,51 @@ import { products } from "../data/products"
 
 import { useCart } from "../context/CartContext"
 
-import { ShoppingBag, Menu, X, ChevronDown } from "lucide-react"
+import { ShoppingBag, Menu, X, ChevronDown, User, LogOut } from "lucide-react"
+
+import ConfirmModal from "./UI/ConfirmModal"
 
 import Container from "./UI/Container"
+
+import IconButton from "./UI/IconButton"
+import { useAuth } from "../context/AuthContext"
+
+import { Heart } from "lucide-react"
+
+import { useFavorites } from "../context/FavoritesContext"
+
 
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
     const [mobileMenu, setMobileMenu] = useState(false)
     const [mobileProducts, setMobileProducts] = useState(false)
+    const [showLogoutModal, setShowLogoutModal] = useState(false)
+
+    const [
+        isProfileOpen,
+        setIsProfileOpen,
+    ] = useState(false)
+
 
     const { cart, setIsCartOpen } = useCart()
+
+    const {
+
+        favorites,
+
+        setIsFavoritesOpen,
+
+    } = useFavorites()
+
+    const {
+
+        user,
+
+        logout,
+
+        setIsAuthOpen,
+
+    } = useAuth()
 
     return (
         <nav className="bg-black text-white border-b border-zinc-800 relative z-50">
@@ -70,14 +105,131 @@ function Navbar() {
                     </ul>
 
                     {/* ICONOS */}
+
                     <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 shrink-0">
-                        <button
+
+                        <IconButton
+
+                            icon={
+
+                                <div className="relative">
+
+                                    <Heart size={20} />
+
+                                    {favorites.length > 0 && (
+
+                                        <span className="favorite-counter">
+
+                                            {favorites.length}
+
+                                        </span>
+
+                                    )}
+
+                                </div>
+                            }
+
+                            label="Favoritos"
+
+                            onClick={() =>
+                                setIsFavoritesOpen(true)
+                            }
+                        />
+                        <IconButton
+
+                            icon={
+                                <div className="flex items-center gap-2">
+
+                                    <ShoppingBag size={18} />
+
+                                    <span className="text-sm 2xl:text-base">
+
+                                        {cart.length}
+
+                                    </span>
+
+                                </div>
+                            }
+
+                            label="Carrito"
+
                             onClick={() => setIsCartOpen(true)}
-                            className="flex items-center gap-2 hover:text-[#C8A46B] transition-colors duration-300"
-                        >
-                            <ShoppingBag size={18} className="text-zinc-200" />
-                            <span className="text-sm 2xl:text-base">{cart.length}</span>
-                        </button>
+                        />
+
+                        {user ? (
+
+                            <div className="relative">
+
+                                <IconButton
+
+                                    icon={<User size={20} />}
+
+                                    label="Perfil"
+
+                                    onClick={() =>
+                                        setIsProfileOpen(
+                                            (prev) => !prev
+                                        )
+                                    }
+                                />
+
+                                {isProfileOpen && (
+
+                                    <div className="profile-dropdown">
+
+                                        <div className="profile-dropdown-info">
+
+                                            <p className="profile-dropdown-name">
+
+                                                {user.name}
+
+                                            </p>
+
+                                            <p className="profile-dropdown-email">
+
+                                                {user.email}
+
+                                            </p>
+
+                                        </div>
+
+                                        <button
+                                            onClick={() => {
+
+                                                setShowLogoutModal(true)
+
+                                                setIsProfileOpen(false)
+                                            }}
+                                            className="profile-dropdown-logout"
+                                        >
+
+                                            Cerrar sesión
+
+                                        </button>
+
+                                    </div>
+                                )}
+
+                            </div>
+
+                        ) : (
+
+                            <div className="relative">
+
+                                <IconButton
+
+                                    icon={<User size={20} />}
+
+                                    label="Perfil"
+
+                                    onClick={() =>
+                                        setIsAuthOpen(true)
+                                    }
+                                />
+
+                            </div>
+
+                        )}
 
                         <img
                             src={Arbol}
@@ -214,6 +366,28 @@ function Navbar() {
                     </Container>
                 </div>
             )}
+
+            <ConfirmModal
+
+                isOpen={showLogoutModal}
+
+                title="Cerrar sesión"
+
+                description="¿Seguro que deseas cerrar sesión?"
+
+                confirmText="Cerrar sesión"
+
+                onCancel={() =>
+                    setShowLogoutModal(false)
+                }
+
+                onConfirm={() => {
+
+                    logout()
+
+                    setShowLogoutModal(false)
+                }}
+            />
         </nav>
     )
 }

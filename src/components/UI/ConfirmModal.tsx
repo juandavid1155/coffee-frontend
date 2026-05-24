@@ -1,6 +1,8 @@
 import Button from "./button"
 
 type ConfirmModalProps = {
+    
+    confirmText?: string
 
     isOpen: boolean
 
@@ -24,6 +26,8 @@ function ConfirmModal({
     onConfirm,
 
     onCancel,
+
+    confirmText = "Confirmar",
 
 }: ConfirmModalProps) {
 
@@ -69,7 +73,7 @@ function ConfirmModal({
                         variant="primary"
                         onClick={onConfirm}
                     >
-                        Eliminar
+                        {confirmText}
                     </Button>
 
                 </div>

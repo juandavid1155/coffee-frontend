@@ -1,0 +1,176 @@
+.quick-view-overlay {
+
+    @apply
+    fixed
+    inset-0
+    z-[120]
+
+    flex
+    items-center
+    justify-center
+
+    px-4;
+}
+
+.quick-view-backdrop {
+
+    @apply
+    absolute
+    inset-0
+
+    bg-black/70
+    backdrop-blur-sm;
+}
+
+.quick-view-modal {
+
+    @apply
+    relative
+
+    bg-zinc-950
+
+    border
+    border-zinc-800
+
+    rounded-3xl
+    overflow-hidden
+
+    w-full
+    max-w-3xl
+
+    grid
+    lg:grid-cols-2
+
+    h-[85vh]
+
+    grid
+    lg:grid-cols-[0.9fr_1.1fr]
+
+    shadow-2xl;
+}
+
+.quick-view-image-wrapper {
+
+    @apply
+    relative
+    h-[320px]
+    lg:h-full;
+}
+
+.quick-view-image {
+
+    @apply
+    w-full
+    h-full
+    object-cover;
+}
+
+.quick-view-content {
+
+    @apply
+    relative
+
+    p-8
+    lg:p-10
+
+    flex
+    flex-col
+    
+    overflow-y-auto;
+}
+
+.quick-view-close {
+
+    @apply
+    absolute
+    top-5
+    right-5
+
+    text-zinc-400
+
+    transition
+    duration-300
+
+    hover:text-white;
+}
+
+.quick-view-subtitle {
+
+    @apply
+    text-gold
+    uppercase
+
+    tracking-[0.25em]
+
+    text-sm
+    mb-4;
+}
+
+.quick-view-title {
+
+    @apply
+    text-5xl
+    font-bold
+    mb-6
+    leading-none;
+}
+
+.quick-view-description {
+
+    @apply
+    text-zinc-400
+    leading-relaxed
+    text-lg
+    mb-8;
+}
+
+.quick-view-footer {
+
+    @apply
+    mt-auto;
+}
+
+.quick-view-button {
+
+    @apply
+    w-full
+
+    bg-gold
+    text-black
+
+    py-4
+
+    rounded-2xl
+
+    font-semibold
+
+    transition
+    duration-300
+
+    hover:scale-[1.02];
+}
+
+
+/* QUICK VIEW SCROLLBAR */
+
+.quick-view-content::-webkit-scrollbar {
+
+    width: 4px;
+}
+
+.quick-view-content::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+.quick-view-content::-webkit-scrollbar-thumb {
+
+    background: #C8A46B;
+
+    border-radius: 999px;
+}
+
+.quick-view-content::-webkit-scrollbar-thumb:hover {
+
+    background: #d8b57a;
+}

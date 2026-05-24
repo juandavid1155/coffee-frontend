@@ -3,6 +3,7 @@ import {
     useContext,
     useState,
     useMemo,
+    useEffect,
 } from "react"
 
 export type CartItem = {
@@ -62,10 +63,29 @@ export function CartProvider({
     children: React.ReactNode
 }) {
 
-    const [cart, setCart] = useState<CartItem[]>([])
+    const [cart, setCart] = useState<CartItem[]>(() => {
+
+        const storedCart =
+            localStorage.getItem("cart")
+
+        return storedCart
+            ? JSON.parse(storedCart)
+            : []
+    })
 
     const [isCartOpen, setIsCartOpen] = useState(false)
 
+
+    useEffect(() => {
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        )
+
+    }, [cart])
+
+        
     function addToCart(item: CartItem) {
 
 

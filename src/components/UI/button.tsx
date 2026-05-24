@@ -4,6 +4,10 @@ type ButtonProps = {
 
     onClick?: () => void
 
+    type?: "button" | "submit" | "reset"
+
+    className?: string
+
     variant?:
     | "primary"
     | "outline"
@@ -16,11 +20,15 @@ type ButtonProps = {
 
     added?: boolean
 }
-
 function Button({
 
     children,
+
     onClick,
+
+    type = "button",
+
+    className = "",
 
     variant = "primary",
 
@@ -139,22 +147,29 @@ function Button({
     return (
 
         <button
+
+            type={type}
+
             onClick={onClick}
+
             className={`
 
-                ${baseStyles}
+        ${baseStyles}
 
-                ${variants[variant]}
+        ${variants[variant]}
 
-                ${shake
+        ${shake
                     ? "animate-shake scale-[1.03]"
                     : ""
                 }
 
-            `}
-        >
+        ${className}
 
-            {children}
+    `}
+
+    
+        >
+        {children}
 
         </button>
 
