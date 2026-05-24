@@ -1,0 +1,148 @@
+/* SIDEBAR BACKDROP */
+
+.sidebar-backdrop {
+
+    @apply
+    fixed
+    inset-0
+
+    bg-black/60
+
+    backdrop-blur-sm
+
+    opacity-0
+
+    pointer-events-none
+
+    transition-all
+    duration-300
+
+    z-[90];
+}
+
+.sidebar-backdrop.active {
+
+    @apply
+    opacity-100
+
+    pointer-events-auto;
+}
+
+/* SIDEBAR BASE */
+
+.sidebar {
+
+    @apply
+    fixed
+
+    top-0
+    right-0
+
+    h-screen
+
+    w-full
+    sm:w-[420px]
+
+    bg-zinc-950
+
+    border-l
+    border-zinc-800
+
+    translate-x-full
+
+    transition-transform
+    duration-500
+
+    z-[100]
+
+    flex
+    flex-col;
+}
+
+.sidebar.open {
+
+    @apply
+    translate-x-0;
+}
+
+/* HEADER */
+
+.sidebar-header {
+
+    @apply
+    flex
+    items-center
+    justify-between
+
+    px-6
+    py-6
+
+    border-b
+    border-zinc-800;
+}
+
+.sidebar-subtitle {
+
+    @apply
+    uppercase
+
+    tracking-[0.2em]
+
+    text-xs
+
+    text-gold
+
+    mb-2;
+}
+
+.sidebar-title {
+
+    @apply
+    text-2xl
+
+    font-bold
+
+    text-white;
+}
+
+.sidebar-close {
+
+    @apply
+    text-zinc-400
+
+    transition
+    duration-300
+
+    hover:text-white;
+}
+
+/* CONTENT */
+
+.sidebar-content {
+
+    @apply
+    flex-1
+
+    overflow-y-auto
+
+    p-6;
+}
+
+/* EMPTY */
+
+.sidebar-empty {
+
+    @apply
+    h-full
+
+    flex
+    flex-col
+    items-center
+    justify-center
+
+    gap-4
+
+    text-zinc-500
+
+    text-center;
+}

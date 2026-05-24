@@ -16,7 +16,7 @@ import AuthModal from "./components/UI/AuthModal"
 import RegisterPage from "./pages/RegisterPage"
 
 import { useAuth } from "./context/AuthContext"
-
+import FavoritesSidebar from "./components/FavoritesSidebar"
 
 function App() {
 
@@ -31,6 +31,8 @@ function App() {
       <SocialSidebar />
 
       <CartSidebar />
+
+      <FavoritesSidebar />
 
       <ScrollToHash />
 
