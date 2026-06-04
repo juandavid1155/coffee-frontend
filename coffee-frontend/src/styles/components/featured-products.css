@@ -1,0 +1,101 @@
+/* FEATURED PRODUCTS */
+.featured-section {
+    @apply
+    bg-black
+    text-white
+    py-[clamp(4rem,8vw,8rem)];
+}
+
+.featured-header {
+    @apply
+    mb-[clamp(3rem,6vw,6rem)]
+    text-center;
+}
+
+.featured-subtitle {
+    @apply
+    text-gold
+    uppercase
+    tracking-[0.3em]
+    mb-4
+    text-[clamp(0.75rem,1vw,0.95rem)];
+}
+
+.featured-title {
+    @apply
+    text-[clamp(2.5rem,5vw,6rem)]
+    font-bold
+    leading-[0.95];
+}
+
+.featured-grid {
+    @apply
+    grid
+    md:grid-cols-2
+    gap-[clamp(1.5rem,3vw,3rem)];
+}
+
+.product-card {
+    @apply
+    bg-zinc-950
+    rounded-3xl
+    overflow-hidden
+    border
+    border-zinc-800
+    hover:border-gold
+    transition-all
+    duration-500;
+}
+
+.product-card-image-wrapper {
+    @apply
+    overflow-hidden
+    relative;
+}
+
+.product-card-image {
+    @apply
+    w-full
+    h-[clamp(260px,34vw,520px)]
+    object-cover
+    group-hover:scale-95
+    transition-transform
+    duration-700;
+}
+
+.product-card-content {
+    @apply
+    p-[clamp(1.3rem,2vw,2rem)];
+}
+
+.product-card-title {
+    @apply
+    text-[clamp(1.6rem,2vw,3rem)]
+    font-bold
+    mb-4
+    leading-none;
+}
+
+.product-card-description {
+    @apply
+    text-zinc-400
+    mb-6
+    leading-relaxed
+    text-[clamp(0.95rem,1.2vw,1.1rem)];
+}
+
+.product-card-link {
+    @apply
+    text-gold
+    font-semibold
+    hover:opacity-80
+    transition;
+}
+
+.featured-loading {
+    @apply
+    bg-black
+    text-white
+    py-20
+    text-center;
+}

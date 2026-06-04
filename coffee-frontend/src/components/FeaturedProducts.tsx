@@ -1,127 +1,63 @@
-import { products } from "../data/products"
 import { Link } from "react-router-dom"
 import Container from "./UI/Container"
-import { Plus } from "lucide-react"
+import { Plus, Heart } from "lucide-react"
 import { useState } from "react"
 import QuickViewModal from "./UI/QuickViewModal"
-import { Heart } from "lucide-react"
 import { useFavorites } from "../context/FavoritesContext"
+import { useProducts } from "../context/ProductsContext"
+import "../styles/components/featured-products.css"
 
 function FeaturedProducts() {
+    const { products, loading } = useProducts()
+    const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
+    const { toggleFavorite, isFavorite } = useFavorites()
 
-    const [selectedProduct, setSelectedProduct] =
-        useState<(typeof products)[0] | null>(null)
-
-    const {
-        toggleFavorite,
-        isFavorite,
-    } = useFavorites()
+    if (loading) return <div className="featured-loading">Cargando...</div>
 
     return (
-        <section
-            id="products"
-            className="bg-black text-white py-[clamp(4rem,8vw,8rem)]"
-        >
+        <section id="products" className="featured-section">
             <Container>
-                {/* HEADER */}
-                <div className="mb-[clamp(3rem,6vw,6rem)] text-center">
-                    <p className="text-gold uppercase tracking-[0.3em] mb-4 text-[clamp(0.75rem,1vw,0.95rem)]">
-                        Nuestras variedades
-                    </p>
-
-                    <h2 className="text-[clamp(2.5rem,5vw,6rem)] font-bold leading-[0.95]">
-                        Café de origen premium
-                    </h2>
+                <div className="featured-header">
+                    <p className="featured-subtitle">Nuestras variedades</p>
+                    <h2 className="featured-title">Café de origen premium</h2>
                 </div>
 
-                {/* GRID */}
-                <div className="grid md:grid-cols-2 gap-[clamp(1.5rem,3vw,3rem)]">
+                <div className="featured-grid">
                     {products.map((product) => (
-                        <div
-                            key={product.name}
-                            className="
-                            bg-zinc-950
-                            rounded-3xl
-                            overflow-hidden
-                            border border-zinc-800
-                            hover:border-gold
-                            transition-all duration-500
-                            group
-                            "
-                        >
-                            {/* IMAGE */}
-                            <div className="overflow-hidden relative">
+                        <div key={product.slug} className="product-card group">
+                            <div className="product-card-image-wrapper">
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className="
-                                    w-full
-                                    h-[clamp(260px,34vw,520px)]
-                                    object-cover
-                                    group-hover:scale-95
-                                    transition-transform duration-700
-                                    "
+                                    className="product-card-image"
                                 />
-                                <button className="product-hover-button"
-                                    onClick={() => setSelectedProduct(product)}>
-
-
+                                <button
+                                    className="product-hover-button"
+                                    onClick={() => setSelectedProduct(product)}
+                                >
                                     <span className="product-hover-icon">
-
                                         <Plus size={28} strokeWidth={1.8} />
-
                                     </span>
-
                                 </button>
                                 <button
-                                    onClick={() =>
-
-                                        toggleFavorite({
-
-                                            slug: product.slug,
-
-                                        })
-                                    }
+                                    onClick={() => {
+                                        console.log("product.id:", product.id)
+                                        toggleFavorite({ slug: product.slug, productId: product.id })
+                                    }}
                                     className="product-favorite-button"
                                 >
-
                                     <Heart
                                         size={22}
-                                        className={
-                                            isFavorite({
-
-                                                slug: product.slug,
-                                            })
-
-                                                ? "product-favorite-active"
-
-                                                : ""
-                                        }
+                                        className={isFavorite(product.slug) ? "product-favorite-active" : ""}
                                     />
-
-                                    <span className="product-favorite-label">
-
-                                        Favorito
-
-                                    </span>
-
+                                    <span className="product-favorite-label">Favorito</span>
                                 </button>
                             </div>
 
-                            {/* CONTENT */}
-                            <div className="p-[clamp(1.3rem,2vw,2rem)]">
-                                <h3 className="text-[clamp(1.6rem,2vw,3rem)] font-bold mb-4 leading-none">
-                                    {product.name}
-                                </h3>
-
-                                <p className="text-zinc-400 mb-6 leading-relaxed text-[clamp(0.95rem,1.2vw,1.1rem)]">
-                                    {product.description}
-                                </p>
-
-                                <Link
-                                    to={`/products/${product.slug}`}
-                                    className="text-gold font-semibold hover:opacity-80 transition"
-                                >
+                            <div className="product-card-content">
+                                <h3 className="product-card-title">{product.name}</h3>
+                                <p className="product-card-description">{product.description}</p>
+                                <Link to={`/products/${product.slug}`} className="product-card-link">
                                     Explorar variedad →
                                 </Link>
                             </div>
@@ -131,16 +67,10 @@ function FeaturedProducts() {
             </Container>
 
             <QuickViewModal
-
                 isOpen={!!selectedProduct}
-
                 product={selectedProduct}
-
-                onClose={() =>
-                    setSelectedProduct(null)
-                }
+                onClose={() => setSelectedProduct(null)}
             />
-
         </section>
     )
 }

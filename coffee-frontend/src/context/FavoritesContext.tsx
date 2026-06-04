@@ -4,197 +4,118 @@ import {
     useState,
     useEffect,
 } from "react"
-
 import { useAuth } from "./AuthContext"
+import api from "../services/api"
 
 type FavoriteItem = {
-
     slug: string
-
+    productId: number
     size?: string
-
     grind?: string
 }
 
 type FavoritesContextType = {
-
     favorites: FavoriteItem[]
-
-
-
-    toggleFavorite: (
-        item: FavoriteItem
-    ) => void
+    toggleFavorite: (item: FavoriteItem) => void
 
     isFavorite: (
-        item: FavoriteItem
+        slug: string,
+        size?: string,
+        grind?: string
     ) => boolean
 
     isFavoritesOpen: boolean
-
-    setIsFavoritesOpen:
-    React.Dispatch<
-        React.SetStateAction<boolean>
-    >
+    setIsFavoritesOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+const FavoritesContext = createContext<FavoritesContextType | null>(null)
 
-
-const FavoritesContext =
-    createContext<FavoritesContextType | null>(null)
-
-export function FavoritesProvider({
-
-    children,
-
-}: {
-    children: React.ReactNode
-}) {
-
-
-
-    const [favorites, setFavorites] =
-        useState<FavoriteItem[]>([])
-
-
-    const [
-        isFavoritesOpen,
-        setIsFavoritesOpen,
-    ] = useState(false)
-
-    const {
-
-        user,
-
-        setIsAuthOpen,
-
-    } = useAuth()
-
-
-    const favoritesKey = user
-
-        ? `favorites-${user.email}`
-
-        : "favorites-guest"
+export function FavoritesProvider({ children }: { children: React.ReactNode }) {
+    const [favorites, setFavorites] = useState<FavoriteItem[]>([])
+    const [isFavoritesOpen, setIsFavoritesOpen] = useState(false)
+    const { user, setIsAuthOpen } = useAuth()
 
     useEffect(() => {
-
-        const storedFavorites =
-            localStorage.getItem(
-                favoritesKey
-            )
-
-        setFavorites(
-
-            storedFavorites
-
-                ? JSON.parse(storedFavorites)
-
-                : []
-        )
-
-    }, [favoritesKey])
-
-    useEffect(() => {
-
-        localStorage.setItem(
-            favoritesKey,
-            JSON.stringify(favorites)
-        )
-
-    }, [favorites, favoritesKey])
-
-
-    function toggleFavorite(
-        item: FavoriteItem
-    ) {
-
         if (!user) {
-
-            setIsAuthOpen(true)
-
+            setFavorites([])
             return
         }
-
-        setFavorites((prev) => {
-
-            const exists = prev.some(
-
-                (fav) =>
-
-                    fav.slug === item.slug &&
-                    fav.size === item.size &&
-                    fav.grind === item.grind
+        const token = localStorage.getItem("token")
+        api.get("/favorites", {
+            headers: { Authorization: `Bearer ${token}` }
+        }).then(res => {
+            setFavorites(
+                res.data.map((f: any) => ({
+                    slug: f.product.slug,
+                    productId: f.productId,
+                    size: f.size,
+                    grind: f.grind
+                }))
             )
+        })
+    }, [user])
 
-            if (exists) {
+    async function toggleFavorite(item: FavoriteItem) {
 
-                return prev.filter(
-
-                    (fav) =>
-
+        if (!user) {
+            setIsAuthOpen(true)
+            return
+        }
+        const token = localStorage.getItem("token")
+        const res = await api.post("/favorites/toggle",
+            {
+                productId: item.productId,
+                size: item.size,
+                grind: item.grind,
+            },
+            { headers: { Authorization: `Bearer ${token}` } }
+        )
+        if (res.data.action === "added") {
+            setFavorites(prev => [...prev, item])
+        } else {
+            setFavorites(prev =>
+                prev.filter(
+                    f =>
                         !(
-
-                            fav.slug === item.slug &&
-                            fav.size === item.size &&
-                            fav.grind === item.grind
+                            f.slug === item.slug &&
+                            f.size === item.size &&
+                            f.grind === item.grind
                         )
                 )
-            }
-
-            return [...prev, item]
-        })
+            )
+        }
     }
 
     function isFavorite(
-        item: FavoriteItem
+        slug: string,
+        size?: string,
+        grind?: string
     ) {
-
         return favorites.some(
-
-            (fav) =>
-
-                fav.slug === item.slug &&
-                fav.size === item.size &&
-                fav.grind === item.grind
+            f =>
+                f.slug === slug &&
+                f.size === size &&
+                f.grind === grind
         )
     }
 
     return (
-
-        <FavoritesContext.Provider
-            value={{
-
-                favorites,
-
-                toggleFavorite,
-
-                isFavorite,
-
-                isFavoritesOpen,
-
-                setIsFavoritesOpen,
-
-            }}
-        >
-
+        <FavoritesContext.Provider value={{
+            favorites,
+            toggleFavorite,
+            isFavorite,
+            isFavoritesOpen,
+            setIsFavoritesOpen,
+        }}>
             {children}
-
         </FavoritesContext.Provider>
     )
 }
 
 export function useFavorites() {
-
-    const context =
-        useContext(FavoritesContext)
-
+    const context = useContext(FavoritesContext)
     if (!context) {
-
-        throw new Error(
-            "useFavorites must be used inside FavoritesProvider"
-        )
+        throw new Error("useFavorites must be used inside FavoritesProvider")
     }
-
     return context
 }

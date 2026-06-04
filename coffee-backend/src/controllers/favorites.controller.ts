@@ -17,25 +17,50 @@ export const getFavorites = async (req: Request, res: Response) => {
 }
 
 export const toggleFavorite = async (req: Request, res: Response) => {
+
     const userId = (req as any).userId
+
     const { productId, size, grind } = req.body
 
     try {
+
         const exists = await prisma.favorite.findFirst({
-            where: { userId, productId }
+            where: {
+                userId,
+                productId,
+                size,
+                grind
+            }
         })
 
         if (exists) {
-            await prisma.favorite.delete({ where: { id: exists.id } })
-            res.json({ action: "removed" })
-        } else {
-            await prisma.favorite.create({
-                data: { userId, productId, size, grind }
+
+            await prisma.favorite.delete({
+                where: { id: exists.id }
             })
+
+            res.json({ action: "removed" })
+
+        } else {
+
+            await prisma.favorite.create({
+                data: {
+                    userId,
+                    productId,
+                    size,
+                    grind
+                }
+            })
+
             res.json({ action: "added" })
         }
+
     } catch (error) {
+
         console.error("Error toggleFavorite:", error)
-        res.status(500).json({ message: "Error en el servidor" })
+
+        res.status(500).json({
+            message: "Error en el servidor"
+        })
     }
 }

@@ -242,6 +242,8 @@ function AddToCartActions({
 
                         toggleFavorite({
 
+                            productId: product.id,
+
                             slug: product.slug,
 
                             size: selectedSize,
@@ -256,14 +258,11 @@ function AddToCartActions({
                     <Heart
                         size={22}
                         className={
-                            isFavorite({
-
-                                slug: product.slug,
-
-                                size: selectedSize,
-
-                                grind: selectedGrind,
-                            })
+                            isFavorite(
+                                product.slug,
+                                selectedSize,
+                                selectedGrind
+                            )
 
                                 ? "favorite-icon-active"
 
@@ -272,20 +271,13 @@ function AddToCartActions({
                     />
 
                     <span>
-
-                        {isFavorite({
-
-                            slug: product.slug,
-
-                            size: selectedSize,
-
-                            grind: selectedGrind,
-                        })
-
+                        {isFavorite(
+                            product.slug,
+                            selectedSize,
+                            selectedGrind
+                        )
                             ? "Guardado en favoritos"
-
                             : "Agregar a favoritos"}
-
                     </span>
 
                 </button>
