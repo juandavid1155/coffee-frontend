@@ -26,11 +26,7 @@ html{
   scroll-behavior: smooth;
 }
 
-html,
-body,
-#root {
-  overflow-x: hidden;
-}
+
 /* CART SCROLLBAR */
 
 .cart-scroll::-webkit-scrollbar {
@@ -45,14 +41,14 @@ body,
 
 .cart-scroll::-webkit-scrollbar-thumb {
 
-    background: #C8A46B;
+    background: theme('colors.gold');;
 
     border-radius: 999px;
 }
 
 .cart-scroll::-webkit-scrollbar-thumb:hover {
 
-    background: #d8b57a;
+    background: theme('colors.gold-light');
 }
 
 body.cart-open {
@@ -77,14 +73,14 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
 
-    background: #C8A46B;
+    background: theme('colors.gold');;
 
     border-radius: 999px;
 }
 
 body::-webkit-scrollbar-thumb:hover {
 
-    background: #d8b57a;
+    background: theme('colors.gold-light');
 }
 
 .product-hover-button {
@@ -172,7 +168,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .favorite-icon-active {
 
-    fill: #C8A46B;
+    fill: theme('colors.gold');
 }
 
 .product-favorite-button {
@@ -207,9 +203,9 @@ body::-webkit-scrollbar-thumb:hover {
 
 .product-favorite-active {
 
-    fill: #C8A46B;
+    fill: theme('colors.gold');
 
-    color: #C8A46B;
+    color: theme('colors.gold');;
 }
 
 .product-favorite-label {

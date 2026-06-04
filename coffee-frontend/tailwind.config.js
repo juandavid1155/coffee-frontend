@@ -14,6 +14,7 @@ module.exports = {
       colors: {
 
         gold: "#C8A46B",
+      "gold-light": "#d8b57a",
       },
 
       maxWidth: {
