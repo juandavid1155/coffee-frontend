@@ -1,0 +1,461 @@
+/* NAVBAR */
+
+.navbar-container {
+
+    @apply
+    flex
+    items-center
+    justify-between
+
+    gap-4;
+}
+
+.navbar-actions {
+
+    @apply
+    flex
+    items-center
+
+    gap-2
+    sm:gap-4
+    lg:gap-6
+
+    min-w-0;
+}
+
+.navbar-logo {
+
+    @apply
+    flex
+    items-center
+
+    shrink-0;
+}
+
+.navbar-tree {
+
+    @apply
+    hidden
+    md:block
+
+    h-9
+    lg:h-10
+    2xl:h-14
+
+    w-auto
+
+    object-contain;
+}
+
+.navbar-desktop-menu {
+
+    @apply
+    hidden
+    lg:flex
+
+    items-center
+
+    gap-8
+    xl:gap-12
+    2xl:gap-16
+
+    text-sm
+    2xl:text-base
+
+    uppercase
+
+    tracking-[0.2em];
+}
+
+/* NAVBAR LOGO IMAGE */
+
+.navbar-logo-image {
+
+    @apply
+    h-10
+    sm:h-11
+    lg:h-12
+    2xl:h-16
+
+    w-auto
+
+    object-contain;
+
+    display: block;
+}
+
+
+@media (max-width: 375px) {
+
+    .navbar-logo-image {
+
+        height: 2rem;
+    }
+
+    .navbar-actions {
+
+        gap: 0.35rem;
+    }
+}
+/* NAVBAR LINK */
+
+.navbar-link {
+
+    @apply
+    hover:text-gold
+
+    transition-colors
+    duration-300;
+}
+
+/* NAVBAR ICON GROUP */
+
+.navbar-cart-icon {
+
+    @apply
+    flex
+    items-center
+
+    gap-2;
+}
+
+.navbar-cart-count {
+
+    @apply
+    text-sm
+    2xl:text-base;
+}
+
+/* MOBILE MENU BUTTON */
+
+.navbar-mobile-button {
+
+    @apply
+    lg:hidden
+
+    text-white
+
+    hover:text-gold
+
+    transition-colors;
+}
+
+/* MOBILE MENU */
+
+.navbar-mobile-menu {
+
+    @apply
+    lg:hidden
+
+    border-t
+    border-zinc-800
+
+    bg-black/95
+
+    backdrop-blur-md;
+}
+
+.navbar-mobile-menu-list {
+
+    @apply
+    flex
+    flex-col
+
+    px-5
+    sm:px-6
+
+    py-6
+
+    uppercase
+
+    tracking-[0.18em]
+
+    text-sm;
+}
+
+.navbar-mobile-item {
+
+    @apply
+    py-4
+
+    border-b
+    border-zinc-800;
+}
+
+.navbar-mobile-link {
+
+    @apply
+    hover:text-gold
+
+    transition-colors;
+}
+
+/* MOBILE PRODUCTS BUTTON */
+
+.navbar-mobile-products-button {
+    @apply
+    w-full
+    flex
+    items-center
+    justify-between
+    py-4
+    text-white       
+    uppercase            
+    tracking-[0.18em]    
+    text-sm    
+    hover:text-gold
+    transition;
+}
+.navbar-mobile-products-item {
+    @apply
+    border-b
+    border-zinc-800
+    py-4;
+}
+/* MOBILE PRODUCTS LIST */
+
+.navbar-mobile-products-list {
+
+    @apply
+    pb-4
+    pl-4
+
+    flex
+    flex-col
+
+    gap-3;
+}
+
+.navbar-mobile-product-link {
+
+    @apply
+    text-zinc-400
+
+    hover:text-gold
+
+    transition-colors
+
+    normal-case
+
+    tracking-normal
+
+    text-base
+
+    font-semibold;
+}
+
+/* MEGA MENU */
+
+.navbar-mega-menu {
+
+    @apply
+    absolute
+
+    left-0
+    top-full
+
+    w-full
+
+    bg-zinc-950/95
+
+    backdrop-blur-md
+
+    border-t
+    border-zinc-800
+
+    z-50
+
+    hidden
+    lg:block;
+}
+
+.navbar-mega-grid {
+
+    @apply
+    grid
+    grid-cols-3
+
+    gap-12
+    2xl:gap-16
+
+    items-start;
+}
+
+.navbar-mega-title {
+
+    @apply
+    text-[text-gold]
+
+    mb-6
+
+    uppercase
+
+    text-sm
+    2xl:text-base
+
+    tracking-[0.2em];
+}
+
+.navbar-mega-products {
+
+    @apply
+    space-y-4;
+}
+
+.navbar-mega-product-link {
+
+    @apply
+    block
+
+    text-2xl
+    xl:text-3xl
+    2xl:text-4xl
+
+    font-bold
+
+    leading-tight
+
+    hover:text-gold
+    cursor-pointer
+    transition-colors
+    duration-300;
+}
+
+
+
+.navbar-mega-presentation-list {
+
+    @apply
+    space-y-4
+
+    text-zinc-300
+
+    text-lg
+    2xl:text-xl;
+}
+
+.navbar-mega-image {
+
+    @apply
+    rounded-3xl
+
+    w-full
+
+    h-[320px]
+    xl:h-[380px]
+    2xl:h-[440px]
+
+    object-cover;
+}
+
+/* MOBILE PRODUCTS CHEVRON */
+
+.navbar-mobile-chevron {
+
+    @apply
+    transition-transform
+    duration-300;
+}
+
+.navbar-mobile-chevron-open {
+
+    @apply
+    rotate-180;
+}
+
+/* MEGA MENU CONTAINER */
+
+.navbar-mega-container {
+
+    @apply
+    py-12;
+}
+
+
+/* FAVORITE COUNTER */
+.favorite-counter {
+    @apply
+    absolute
+    -top-1
+    -right-1
+    bg-[text-gold]
+    text-black
+    text-[10px]
+    font-bold
+    rounded-full
+    w-4
+    h-4
+    flex
+    items-center
+    justify-center;
+}
+
+/* PROFILE DROPDOWN */
+.profile-dropdown {
+    @apply
+    absolute
+    right-0
+    top-full
+    mt-2
+    w-52
+    bg-zinc-900
+    border
+    border-zinc-700
+    rounded-xl
+    shadow-xl
+    z-50
+    overflow-hidden;
+}
+
+.profile-dropdown-info {
+    @apply
+    px-4
+    py-3
+    border-b
+    border-zinc-700;
+}
+
+.profile-dropdown-name {
+    @apply
+    text-sm
+    font-semibold
+    text-white;
+}
+
+.profile-dropdown-email {
+    @apply
+    text-xs
+    text-zinc-400
+    truncate;
+}
+
+.profile-dropdown-logout {
+    @apply
+    w-full
+    text-left
+    px-4
+    py-3
+    text-sm
+    text-red-400
+    hover:bg-zinc-800
+    transition-colors;
+}
+
+/* NAVBAR ROOT */
+.navbar-root {
+    @apply
+    bg-black
+    text-white
+    border-b
+    border-zinc-800
+    relative
+    z-50;
+}
+
+/* NAVBAR WRAPPER */
+.navbar-wrapper {
+    @apply
+    py-4
+    2xl:py-6;
+}
+
