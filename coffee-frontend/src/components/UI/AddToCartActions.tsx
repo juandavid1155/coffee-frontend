@@ -7,7 +7,7 @@ import Button from "./button"
 import { Heart, } from "lucide-react"
 
 import { useFavorites } from "../../context/FavoritesContext"
-import { ProductVariant } from "../../context/ProductsContext"
+//import { ProductVariant } from "../../context/ProductsContext"
 
 
 type AddToCartActionsProps = {
