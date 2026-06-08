@@ -1,6 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import api from "../services/api"
 
+export type ProductVariant = {
+    id: number
+    size: string
+    price: number
+}
+
 export type Product = {
     id: number
     slug: string
@@ -9,8 +15,11 @@ export type Product = {
     image: string
     origin: string
     process: string
-    price: number
-    notes?: string[]
+
+    notes: string[]
+    grindOptions: string[]
+
+    variants: ProductVariant[]
 }
 
 type ProductsContextType = {

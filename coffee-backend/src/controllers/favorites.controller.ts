@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { prisma } from "../prisma"
+import { logInfo, logError } from "../utils/logger"
 
 export const getFavorites = async (req: Request, res: Response) => {
     const userId = (req as any).userId
@@ -11,7 +12,7 @@ export const getFavorites = async (req: Request, res: Response) => {
         })
         res.json(favorites)
     } catch (error) {
-        console.error("Error getFavorites:", error)
+        logError("Error getFavorites", error)
         res.status(500).json({ message: "Error en el servidor" })
     }
 }
@@ -35,29 +36,37 @@ export const toggleFavorite = async (req: Request, res: Response) => {
 
         if (exists) {
 
-            await prisma.favorite.delete({
-                where: { id: exists.id }
+            await prisma.favorite.deleteMany({
+                where: {
+                    id: exists.id
+                }
             })
 
             res.json({ action: "removed" })
 
         } else {
 
-            await prisma.favorite.create({
+            const favorite = await prisma.favorite.create({
                 data: {
                     userId,
                     productId,
                     size,
                     grind
+                },
+                include: {
+                    product: true
                 }
             })
 
-            res.json({ action: "added" })
+            res.json({
+                action: "added",
+                favorite
+            })
         }
 
     } catch (error) {
 
-        console.error("Error toggleFavorite:", error)
+        logError("Error toggleFavorite", error)
 
         res.status(500).json({
             message: "Error en el servidor"

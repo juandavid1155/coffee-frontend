@@ -5,7 +5,6 @@ import Arbol from "../assets/arbol.png"
 
 import { Link } from "react-router-dom"
 
-import { products } from "../data/products"
 
 import { useCart } from "../context/CartContext"
 
@@ -23,6 +22,9 @@ import { Heart } from "lucide-react"
 import { useFavorites } from "../context/FavoritesContext"
 import "../styles/components/navbar.css"
 import { useScrollToSection } from "../hooks/useScrollToSection"
+
+import { useProducts } from "../context/ProductsContext"
+
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
     const [mobileMenu, setMobileMenu] = useState(false)
@@ -36,7 +38,7 @@ function Navbar() {
 
 
     const { cart, setIsCartOpen } = useCart()
-
+    const { products } = useProducts()  
     const {
 
         favorites,

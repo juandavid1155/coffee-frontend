@@ -3,14 +3,15 @@ import { useParams } from "react-router-dom"
 import Container from "../components/UI/Container"
 import AddToCartActions from "../components/UI/AddToCartActions"
 import { useProducts } from "../context/ProductsContext"
-import { products as staticProducts } from "../data/products"
 
 function ProductPage() {
+
+
     const { slug } = useParams()
     const { products, loading } = useProducts()
-
-    const apiProduct = products.find((p) => p.slug === slug)
-    const staticProduct = staticProducts.find((p) => p.slug === slug)
+    const apiProduct = products.find(
+        (p) => p.slug === slug
+    )
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" })
@@ -23,7 +24,7 @@ function ProductPage() {
         </div>
     )
 
-    if (!apiProduct || !staticProduct) {
+    if (!apiProduct) {
         return (
             <div className="bg-black text-white min-h-screen flex items-center justify-center">
                 <h1 className="text-3xl lg:text-4xl font-bold">Producto no encontrado</h1>
@@ -32,8 +33,7 @@ function ProductPage() {
     }
 
 
-    const product = { ...staticProduct, id: apiProduct.id }
-
+    const product = apiProduct
     return (
         <section className="bg-black text-white py-20 lg:py-24 2xl:py-32">
             <Container className="grid lg:grid-cols-2 gap-12 lg:gap-16 2xl:gap-24 items-center">
@@ -71,8 +71,11 @@ function ProductPage() {
                     <div className="mb-10">
                         <p className="text-zinc-500 mb-4 2xl:text-lg">Perfil sensorial</p>
                         <div className="flex gap-3 flex-wrap">
-                            {product.notes.map((note) => (
-                                <span key={note} className="border border-gold text-gold px-4 py-2 rounded-full text-sm 2xl:text-base">
+                            {product.notes?.map((note) => (
+                                <span
+                                    key={note}
+                                    className="border border-gold text-gold px-4 py-2 rounded-full text-sm 2xl:text-base"
+                                >
                                     {note}
                                 </span>
                             ))}

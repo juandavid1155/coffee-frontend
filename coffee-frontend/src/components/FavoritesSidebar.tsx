@@ -1,7 +1,6 @@
 import { X, Heart } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useFavorites } from "../context/FavoritesContext"
-import { products } from "../data/products"
 import "../styles/components/sidebar.css"
 
 function FavoritesSidebar() {
@@ -28,21 +27,19 @@ function FavoritesSidebar() {
                 onClick={() =>
                     setIsFavoritesOpen(false)
                 }
-                className={`sidebar-backdrop ${
-                    isFavoritesOpen
+                className={`sidebar-backdrop ${isFavoritesOpen
                         ? "active"
                         : ""
-                }`}
+                    }`}
             />
 
             {/* SIDEBAR */}
 
             <aside
-                className={`sidebar ${
-                    isFavoritesOpen
+                className={`sidebar ${isFavoritesOpen
                         ? "open"
                         : ""
-                }`}
+                    }`}
             >
 
                 {/* HEADER */}
@@ -103,14 +100,9 @@ function FavoritesSidebar() {
 
                         favorites.map((item) => {
 
-                            const product =
-                                products.find(
 
-                                    (p) =>
-                                        p.slug === item.slug
-                                )
 
-                            if (!product)
+                            if (!item.product)
                                 return null
 
                             return (
@@ -121,8 +113,8 @@ function FavoritesSidebar() {
                                 >
 
                                     <img
-                                        src={product.image}
-                                        alt={product.name}
+                                        src={item.product.image}
+                                        alt={item.product.name}
                                         className="favorite-image"
                                     />
 
@@ -130,7 +122,7 @@ function FavoritesSidebar() {
 
                                         <h3 className="favorite-name">
 
-                                            {product.name}
+                                            {item.product.name}
 
                                         </h3>
 
@@ -147,7 +139,7 @@ function FavoritesSidebar() {
                                         </p>
 
                                         <Link
-                                            to={`/products/${product.slug}`}
+                                            to={`/products/${item.slug}`}
                                             onClick={() =>
                                                 setIsFavoritesOpen(false)
                                             }
@@ -162,7 +154,7 @@ function FavoritesSidebar() {
 
                                     <button
                                         onClick={() =>
-                                            toggleFavorite(item) 
+                                            toggleFavorite(item)
                                         }
                                         className="favorite-remove"
                                     >

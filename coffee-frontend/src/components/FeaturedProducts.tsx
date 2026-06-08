@@ -40,15 +40,25 @@ function FeaturedProducts() {
                                     </span>
                                 </button>
                                 <button
-                                    onClick={() => {
-                                        console.log("product.id:", product.id)
-                                        toggleFavorite({ slug: product.slug, productId: product.id })
-                                    }}
+                                    onClick={() => toggleFavorite({
+                                        slug: product.slug,
+                                        productId: product.id,
+                                        size: "500g",
+                                        grind: "En grano"
+                                    })}
                                     className="product-favorite-button"
                                 >
                                     <Heart
                                         size={22}
-                                        className={isFavorite(product.slug) ? "product-favorite-active" : ""}
+                                        className={
+                                            isFavorite(
+                                                product.slug,
+                                                "500g",
+                                                "En grano"
+                                            )
+                                                ? "product-favorite-active"
+                                                : ""
+                                        }
                                     />
                                     <span className="product-favorite-label">Favorito</span>
                                 </button>

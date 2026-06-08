@@ -18,9 +18,10 @@ export const authMiddleware = (
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number }
-        ;(req as any).userId = decoded.userId
+            ; (req as any).userId = decoded.userId
         next()
     } catch {
         res.status(401).json({ message: "Token inválido" })
     }
+
 }

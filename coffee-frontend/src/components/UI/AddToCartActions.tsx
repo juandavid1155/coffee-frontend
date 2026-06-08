@@ -7,6 +7,7 @@ import Button from "./button"
 import { Heart, } from "lucide-react"
 
 import { useFavorites } from "../../context/FavoritesContext"
+import { ProductVariant } from "../../context/ProductsContext"
 
 
 type AddToCartActionsProps = {
@@ -37,7 +38,13 @@ function AddToCartActions({
         useState(false)
 
     const [selectedSize, setSelectedSize] =
-        useState(product.sizes[1])
+        useState(product.variants[0]?.size)
+
+       const selectedVariant =
+    product.variants.find(
+        (v: any) =>
+            v.size === selectedSize
+    ) 
 
     const [selectedGrind, setSelectedGrind] =
         useState(product.grindOptions[0])
@@ -64,9 +71,7 @@ function AddToCartActions({
             quantity,
 
             price:
-                product.price[
-                selectedSize as keyof typeof product.price
-                ],
+                selectedVariant?.price || 0,
         })
 
         setAddedToCart(true)
@@ -109,18 +114,18 @@ function AddToCartActions({
 
                 <div className="flex gap-4 flex-wrap">
 
-                    {product.sizes.map((size: string) => (
+                    {product.variants.map((variant: any) => (
 
                         <Button
-                            key={size}
+                            key={variant.size}
                             variant="selector"
-                            active={selectedSize === size}
+                            active={selectedSize === variant.size}
                             onClick={() =>
-                                setSelectedSize(size)
+                                setSelectedSize(variant.size)
                             }
                         >
 
-                            {size}
+                            {variant.size}
 
                         </Button>
 
@@ -151,10 +156,7 @@ function AddToCartActions({
             >
 
                 $
-                {product.price[
-                    selectedSize as keyof typeof product.price
-                ].toLocaleString("es-CO")} COP
-
+                {selectedVariant?.price?.toLocaleString("es-CO")} COP
             </p>
 
             {/* GRIND */}
